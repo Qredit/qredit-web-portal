@@ -76,9 +76,10 @@ app.use(function(err, req, res, next) {
 
 
 ////
-// Socket IO Stuff
+// Socket IO gettokenlist
 
 io.on('connection', function (socket) {
+	
 
 	socket.on('gettokenlist', function(input) {
 	
@@ -100,8 +101,8 @@ io.on('connection', function (socket) {
 								owneraddress: data[i].tokenDetails.ownerAddress,
 								tokenid: data[i].tokenDetails.tokenIdHex,
 								circsupply: Big(data[i].tokenStats.qty_token_circulating_supply).div(Big(10).pow(data[i].tokenDetails.decimals)).toFixed(data[i].tokenDetails.decimals),
-								pausable: data[i].tokenDetails.pausable==true?'Yes':'No',
-								mintable: data[i].tokenDetails.mintable==true?'Yes':'No'
+								pausable: data[i].tokenDetails.pausable==true?'<i class="nav-icon i-Yes font-weight-bold"style="color:green;"></i>':'<i class="nav-icon i-Close-Window font-weight-bold" style="color:red;"></i>',
+								mintable: data[i].tokenDetails.mintable==true?'<i class="nav-icon i-Yes font-weight-bold" style="color:green;"></i>':'<i class="nav-icon i-Close-Window font-weight-bold" style="color:red;"></i>'
 				
 							};
 				flatJson.push(tempJson);
@@ -113,9 +114,32 @@ io.on('connection', function (socket) {
 	
 	});
 
+// Socket IO getdelegates
 
+socket.on('getdelegates', function(input) {
+	
+	(async () => {
+		
+		var data = await qapi.listDelegates();
+		
+		var flatJson = [];
+		for(let i = 0; i < data.length; i++)
+		{
+			let tempJson = {
+							username: data[i].username
+						};
+			flatJson.push(tempJson);
+		}
 
+		socket.emit('showdelegates', flatJson);
 
+	})();
+
+});
+
+// Socket IO getblocks
+
+// Socket IO getapifields
     socket.on('getapifields', function (input) {
     
         var apiurl = input.apiurl;
