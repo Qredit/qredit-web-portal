@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<title>{{ title }}</title>
+	<link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet">
+	<link id="gull-theme" rel="stylesheet" href="/stylesheets/css/themes/lite-purple.min.css">
+	<link rel="stylesheet" href="/stylesheets/vendor/perfect-scrollbar.css">
+
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  
+	<!-- Scripts
+	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="/javascripts/socket.io.slim.js"></script>
+
+  
+	<!-- Favicon
+	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<link rel="icon" type="image/png" href="/images/favicon.png">
+  
+</head>
+<body class="text-left">
+
+	<!-- Pre Loader Strat  -->
+	<div class='loadscreen' id="preloader">
+		<div class="loader spinner-bubble spinner-bubble-primary"></div>
+	</div>
+	<!-- Pre Loader end  -->
+
+	<!-- ============ Large SIdebar Layout start ============= -->
+
+
+	<div class="app-admin-wrap layout-sidebar-large clearfix">
+
+		{% include 'layout_header_menu.twig' %}
+		
+            <!-- ============ end of header menu ============= -->
+
+			{% include 'layout_sidebar.twig' %}
+
+            <!-- ============ end of left sidebar ============= -->
+
+            <!-- ============ Body content start ============= -->
+            <div class="main-content-wrap sidenav-open d-flex flex-column">
+                <div class="main-content">
+					<!-- Primary Page Layout
+					–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+					{% block body %}{% endblock %}
+                </div>
+
+				{% include 'layout_footer.twig' %}
+            </div>
+            <!-- ============ Body content End ============= -->
+        </div>
+        <!--=============== End app-admin-wrap ================-->
+
+        <!-- ============ Search UI Start ============= -->
+        {% include 'layout_search.twig' %}
+        <!-- ============ Search UI End ============= -->
+
+	
+
+        <!-- ============ Large Sidebar Layout End ============= -->
+
+
+
+        <script src="/javascripts/common-bundle-script.js"></script>
+        <script src="/javascripts/script.js"></script>
+        <script src="/javascripts/sidebar.large.script.js"></script>
+
+		{% block javascripts %}{% endblock %}
+
+    </body>
+
+</html>

@@ -1,0 +1,273 @@
+<div class="side-content-wrap">
+    <div class="sidebar-left open rtl-ps-none" data-perfect-scrollbar data-suppress-scroll-x="true">
+        <ul class="navigation-left">
+
+
+
+            <li class="nav-item">
+                <a class="nav-item-hold {{ routename=='home' ? 'open' : '' }}" href="/">
+                    <i class="nav-icon i-Home1"></i>
+                    <span class="nav-text">Home</span>
+                </a>
+                <div class="triangle"></div>
+            </li>
+
+            <li class="nav-item">
+                <li class="nav-item {{ routename=='wallet' ? 'open' : '' }}" data-item="wallet">
+                <a class="nav-item-hold" href="#">
+                    <i class="nav-icon i-Wallet"></i>
+                    <span class="nav-text">Web Wallet</span>
+                </a>
+                <div class="triangle"></div>
+            </li>
+
+            <li class="nav-item">
+                <li class="nav-item {{ routename=='explorer' ? 'open' : '' }}" data-item="explorer">
+                <a class="nav-item-hold" href="#">
+                    <i class="nav-icon i-Monitor-Analytics"></i>
+                    <span class="nav-text">Explorer</span>
+                </a>
+                <div class="triangle"></div>
+            </li>
+
+            <li class="nav-item">
+                <li class="nav-item {{ routename=='tools' ? 'open' : '' }}" data-item="tools">
+                <a class="nav-item-hold" href="#">
+                    <i class="nav-icon i-Coding"></i>
+                    <span class="nav-text">Tools</span>
+                </a>
+                <div class="triangle"></div>
+            </li>
+
+             <li class="nav-item {{ routename=='docs' ? 'open' : '' }}" data-item="documentation">
+                <li class="nav-item {{ routename=='documentation' ? 'open' : '' }}" data-item="documentation">
+                    <i class="nav-icon i-Folder-With-Document"></i>
+                    <span class="nav-text">Documentation</span>
+                </a>
+                <div class="triangle"></div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-item-hold {{ routename=='exchanges' ? 'open' : '' }}" href="/exchanges">
+                    <i class="nav-icon i-Shop"></i>
+                    <span class="nav-text">Exchanges</span>
+                </a>
+                <div class="triangle"></div>
+            </li>
+
+        </ul>
+    </div>
+
+    <div class="sidebar-left-secondary rtl-ps-none" data-perfect-scrollbar data-suppress-scroll-x="true">
+        <!-- Submenu Dashboards -->
+
+<!--=============== Wallet childNav ================-->
+
+         <ul class="childNav" data-parent="wallet">
+
+             <p class="text-small text-muted text-center">Select Wallet</p>
+                         <li class="nav-item ">
+                <a class="{{ routename=='testwallet' ? 'open' : '' }}" href="/wallet/testwallet">
+                    <i class="nav-icon i-Wallet"></i>
+                    <span class="item-name">QjmG1....ERsYk</span>
+                </a>
+            </li>
+<div class="separator-breadcrumb border-top"></div>
+            <li class="nav-item ">
+                <a class="{{ routename=='create' ? 'open' : '' }}" href="/wallet/create">
+                    <i class="nav-icon i-Arrow-Right-2"></i><div>
+                    <span class="item-name">Create Wallet</span></div>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="{{ routename=='import' ? 'open' : '' }}" href="/wallet/import">
+                    <i class="nav-icon i-Arrow-Right-2"></i>
+                    <span class="item-name">Import Wallet</span>
+                </a>
+            </li>
+                        <li class="nav-item ">
+                <a class="{{ routename=='rename' ? 'open' : '' }}" href="/wallet/rename">
+                    <i class="nav-icon i-Arrow-Right-2"></i>
+                    <span class="item-name">Rename Wallets</span>
+                </a>
+            </li>
+                        <li class="nav-item ">
+                <a class="{{ routename=='delete' ? 'open' : '' }}" href="/wallet/delete">
+                    <i class="nav-icon i-Arrow-Right-2"></i>
+                    <span class="item-name">Delete Wallets</span>
+                </a>
+            </li>
+                        <li class="nav-item ">
+                <a class="{{ routenaem=='dashboard' ? 'open' : '' }}" href="/wallet">
+                    <i class="nav-icon i-Remove"></i>
+                    <span class="item-name">Log Out / Clear Cache</span>
+                </a>
+            </li>
+
+        </ul>
+
+<!--=============== Explorer childNav ================-->
+
+        <ul class="childNav" data-parent="explorer">
+
+            <li class="nav-item ">
+                <a class="{{ routename=='transactions' ? 'open' : '' }}" href="/explorer/transactions">
+                    <i class="nav-icon i-Arrow-Right-2"></i>
+                    <span class="item-name">Transactions</span>
+                </a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="{{ routename=='topwallets' ? 'open' : '' }}" href="/explorer/topwallets">
+                    <i class="nav-icon i-Arrow-Right-2"></i>
+                    <span class="item-name">Top Wallets</span>
+                </a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="{{ routename=='delegatesmonitor' ? 'open' : '' }}" href="/explorer/delegatesmonitor">
+                    <i class="nav-icon i-Arrow-Right-2"></i>
+                    <span class="item-name">Delegate Monitor</span>
+                </a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="{{ routename=='peers' ? 'open' : '' }}" href="/explorer/peers">
+                    <i class="nav-icon i-Arrow-Right-2"></i>
+                    <span class="item-name">Peers</span>
+                </a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="{{ routename=='tokenlist' ? 'open' : '' }}" href="/explorer/tokenlist">
+                    <i class="nav-icon i-Arrow-Right-2"></i>
+                    <span class="item-name">QAE Tokens</span>
+                </a>
+            </li>
+
+        </ul>
+
+    <!--=============== Tools childNav ================-->
+
+    <ul class="childNav" data-parent="tools">
+
+                    <li class="nav-item ">
+                <a class="{{ routename=='desktopapp' ? 'open' : '' }}" href="/tools/desktopapp">
+                    <i class="nav-icon i-Arrow-Right-2"></i>
+                    <span class="item-name">Desktop App</span>
+                </a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="{{ routename=='mobileapp' ? 'open' : '' }}" href="/tools/mobileapp">
+                    <i class="nav-icon i-Arrow-Right-2"></i>
+                    <span class="item-name">Mobile App</span>
+                </a>
+            </li>
+<div class="separator-breadcrumb border-bottom"></div>
+
+            <li class="nav-item ">
+                <a class="{{ routename=='paperwallet' ? 'open' : '' }}" href="/tools/paperwallet">
+                    <i class="nav-icon i-Arrow-Right-2"></i>
+                    <span class="item-name">Paper Wallet</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item ">
+                <a class="{{ routename=='batchsender' ? 'open' : '' }}" href="/tools/batchsender">
+                    <i class="nav-icon i-Arrow-Right-2"></i>
+                    <span class="item-name">Batch Sender</span>
+                </a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="{{ routename=='generator' ? 'open' : '' }}" href="/tools/generator">
+                    <i class="nav-icon i-Arrow-Right-2"></i>
+                    <span class="item-name">QAE JSON Generator</span>
+                </a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="{{ routename=='qds' ? 'open' : '' }}" href="/tools/qds">
+                    <i class="nav-icon i-Arrow-Right-2"></i>
+                    <span class="item-name">Qredit Data Server</span>
+                </a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="{{ routename=='delegateapp' ? 'open' : '' }}" href="/tools/delegateapp">
+                    <i class="nav-icon i-Arrow-Right-2"></i>
+                    <span class="item-name">Delegate Monitor</span>
+                </a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="{{ routename=='voting' ? 'open' : '' }}" href="/tools/voting">
+                    <i class="nav-icon i-Arrow-Right-2"></i>
+                    <span class="item-name">Voting Calculator</span>
+                </a>
+            </li>
+
+  </ul>
+
+    <!--=============== Documentation childNav ================-->
+
+    <ul class="childNav" data-parent="documentation">
+
+            <li class="nav-item ">
+                <a class="{{ routename=='parameters' ? 'open' : '' }}" href="/docs/parameters">
+                    <i class="nav-icon i-Arrow-Right-2"></i>
+                    <span class="item-name">Blockchain Parameters</span>
+                </a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="{{ routename=='404' ? 'open' : '' }}" href="/docs/libraries">
+                    <i class="nav-icon i-Arrow-Right-2"></i>
+                    <span class="item-name">Libraries</span>
+                </a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="{{ routename=='exchangeintegration' ? 'open' : '' }}" href="/docs/exchangeintegration">
+                    <i class="nav-icon i-Arrow-Right-2"></i>
+                    <span class="item-name">Exchange Integration</span>
+                </a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="{{ routename=='nodemanagement' ? 'open' : '' }}" href="/docs/nodemanagement">
+                    <i class="nav-icon i-Arrow-Right-2"></i>
+                    <span class="item-name">Node Management</span>
+                </a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="{{ routename=='qaeintegration' ? 'open' : '' }}" href="/docs/qaeintegration">
+                    <i class="nav-icon i-Arrow-Right-2"></i>
+                    <span class="item-name">QAE Integration</span>
+                </a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="{{ routename=='apidocs' ? 'open' : '' }}" href="/docs/apidocs">
+                    <i class="nav-icon i-Arrow-Right-2"></i>
+                    <span class="item-name">API Documentation</span>
+                </a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="{{ routename=='docsdelegates' ? 'open' : '' }}" href="/docs/docsdelegates">
+                    <i class="nav-icon i-Arrow-Right-2"></i>
+                    <span class="item-name">Delegates</span>
+                </a>
+            </li>
+  </ul>
+
+
+<!--=============== Overlay ================-->
+  </div>
+    <div class="sidebar-overlay"></div>
+</div>
+<!--=============== Left side End ================-->
