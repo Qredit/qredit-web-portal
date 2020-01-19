@@ -1,12 +1,40 @@
 {% extends 'layout_main.twig' %}
 
 {% block body %}
-
+<style>
+.code {
+    background-color:#484848;
+    color:#00ff00;
+}
+</style>
 <div class="breadcrumb">
-    <h1>Blank</h1>
+    <h1>Node Management</h1>
 </div>
 <p class="text-small text-muted text-left">Text</p>
 <div class="separator-breadcrumb border-top"></div>
+
+<div class="content default"><h1 id="installing-a-qredit-relay-node"><a href="#installing-a-qredit-relay-node" aria-hidden="true" class="header-anchor">#</a> Installing a Qredit Relay Node</h1> <p>For V2, we recommend a VPS, with Ubuntu 18.04 as its OS.
+Since syncing the node for the first time is very CPU intensive, we recommend to use a VPS with at least 2CPU's
+For an optimal P2P connection, we like all nodes to be located in Europe.</p> <h3 id="setup"><a href="#setup" aria-hidden="true" class="header-anchor">#</a> Setup</h3> <ol><li><p>Log in to your VPS</p></li> <li><p>Enter the following command to apply the latest updates to your system</p></li></ol> <div class="language- extra-class"><pre class="language-text">
+<code class="code" style="color:#00ff00; background:#484848;">sudo apt-get update -y &amp;&amp; sudo apt-get upgrade -y &amp;&amp; sudo apt-get dist-upgrade -y
+</code></pre></div><ol start="3"><li>Enter the following commands, executing them one by one, to add new user. We recommend using user qredit for consistency.</li></ol> <div class="language- extra-class"><pre class="language-text"><code class="code">sudo adduser qredit
+sudo usermod -a -G sudo qredit
+</code></pre></div><ol start="4"><li>Switch to your newly created user (qredit)</li></ol> <div class="language- extra-class"><pre class="language-text"><code class="code">su - qredit
+</code></pre></div><ol start="5"><li>The following are Core-Control installation commands, execute them one by one</li></ol> <div class="language- extra-class"><pre class="language-text"><code class="code">git clone https://github.com/qredit/core-control
+cd core-control
+./ccontrol.sh install core
+</code></pre></div><p>After running Core-Control for the first time, the script creates an alias called "ccontrol". After doing a reboot, you can use this alias from within any directory on your server. After the reboot, log into your qredit user again</p> <div class="language- extra-class"><pre class="language-text"><code class="code">sudo reboot
+su - qredit
+</code></pre></div><p><em>OPTIONAL</em> If you have a locally maintained snapshot, this is the time to restore it. Place the snapshot-folder in <code class="code">~/.local/share/qredit-core/mainnet/snapshots</code>, with the correct format (which is <code class="code">1-blockheight at time of the snapshot</code>).
+Then, run this command:</p> <div class="language- extra-class"><pre class="language-text"><code class="code">ccontrol snapshot restore
+</code></pre></div><ol start="6"><li>Command used in this step will start a relay and sync your node to current blockchain height. This step will take up to few hours, depending on your VPS setup and block height.</li></ol> <div class="language- extra-class"><pre class="language-text"><code class="code">ccontrol start relay
+</code></pre></div><ol start="7"><li>After the relay is started you can check the synchronization progress with the following command. You can check current blockchain height by going to the <a href="https://explorer.qredit.io/#/" target="_blank" rel="noopener noreferrer">Explorer<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> and clicking on the “latest blocks” tab. The latest downloaded blocks in the relay logs will show as “Downloading blocks from height...”</li></ol> <div class="language- extra-class"><pre class="language-text"><code class="code">ccontrol logs relay
+</code></pre></div><ol start="8"><li>Optional (but highly recommended), you can create a snapshot when the relay finishes synchronization, to restore your node in case of problems</li></ol> <div class="language- extra-class"><pre class="language-text"><code class="code">ccontrol snapshot create
+</code></pre></div><ol start="9"><li>If your want your all of your (currently running) pm2 processes to start up in case your server (accidently) reboots, run the following commands:</li></ol> <div class="tip custom-block"><p class="custom-block-title">TIP</p> <p>When installing a node using core-control, this step is performed automatically</p></div> <div class="language- extra-class"><pre class="language-text"><code class="code">pm2 save
+pm2 startup
+</code></pre></div><p>The last command will echo a command back. Copy, paste and run that command.</p> <p>That is it, you now have set up a new Relay Node on the Qredit Platform!</p> <h3 id="forging-node"><a href="#forging-node" aria-hidden="true" class="header-anchor">#</a> Forging Node</h3> <p>If you want to become a Qredit delegate and start a Forging Node, please continue your setup <a href="http://docs.qredit.network/delegates/forging-node-install.html" target="_blank" rel="noopener noreferrer">here<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <div class="tip custom-block"><p class="custom-block-title">TIP</p> <p>When you install a Qredit Full Node using Core-Control, it automatically sets an UFW Firewall, only allowing the neccesary ports for Qredit (which are port 22 for SSH access, and ports 4101-4108 for the Qredit processes).
+When / if you are using the server for other things, please remember to open the necessary ports.</p></div></div>
+
 
 {% endblock %}
 

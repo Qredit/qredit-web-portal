@@ -139,6 +139,13 @@ socket.on('getdelegates', function(input) {
 
 // Socket IO getblocks
 
+// Socket IO getpeers
+
+// Socket IO gettransactions
+
+// Socket IO getwallets/top  
+
+
 // Socket IO getapifields
     socket.on('getapifields', function (input) {
     

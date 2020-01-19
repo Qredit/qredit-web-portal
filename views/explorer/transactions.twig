@@ -3,10 +3,46 @@
 {% block body %}
 
 <div class="breadcrumb">
-    <h1>Blank</h1>
+    <h1>Transactions</h1>
 </div>
 <p class="text-small text-muted text-left">Text</p>
 <div class="separator-breadcrumb border-top"></div>
+  <div class="table-responsive">
+  <table class="table table-dark table-sm table-striped">
+        <thead>
+          <tr>
+            <th style="" scope="col">Block Height</th>
+            <th style="" scope="col">Last Block</th>
+            <th style="" scope="col">Forged (10 XQR out of 0 Transactions)</th>
+            <th style="" scope="col">Last Forged</th>
+			<th style="" scope="col">Next Forger</th>
+
+        </tr>
+        </thead>
+  </table>
+</div>
+
+<div class="card">
+<div class="card-body">
+  <div class="table-responsive">
+  <table class="table table-sm table-striped">
+    <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Timestamp</th>
+            <th scope="col">Sender</th>
+            <th scope="col">Recipient</th>
+            <th scope="col">Smartbridge</th>
+            <th scope="col">Amount</th>
+        </tr>
+    </thead>
+    <tbody id='transactions'>
+    </tbody>
+  </table>
+  </div>
+</div>
+</div>
+
 
 {% endblock %}
 

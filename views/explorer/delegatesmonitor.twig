@@ -1,17 +1,85 @@
 {% extends 'layout_main.twig' %}
 
 {% block body %}
-
+<style>
+.table td, .table th{
+	text-align:center;
+}
+</style>
 <div class="breadcrumb">
-    <h1>Blank</h1>
+    <h1>Delegate Monitor</h1>
 </div>
 <p class="text-small text-muted text-left">Text</p>
 <div class="separator-breadcrumb border-top"></div>
+  <div class="table-responsive">
+  <table class="table table-dark table-sm table-striped">
+        <thead>
+          <tr>
+            <th style="" scope="col">Block Height</th>
+            <th style="" scope="col">Last Block</th>
+            <th style="" scope="col">Forged (10 XQR out of 0 Transactions)</th>
+            <th style="" scope="col">Last Forged</th>
+			<th style="" scope="col">Next Forger</th>
 
+        </tr>
+        </thead>
+  </table>
+</div>
+
+<div class="card">
+<div class="card-body">
+  <div class="table-responsive">
+  <table class="table table-sm table-striped">
+    <thead>
+          <tr>
+            <th scope="col">Rank</th>
+            <th scope="col">Username</th>
+            <th scope="col">Blocks Produced</th>
+            <th scope="col">Last Forged (... ago)</th>
+            <th scope="col">Status</th>
+            <th scope="col">Votes %</th>
+        </tr>
+    </thead>
+    <tbody id='delegates'>
+    </tbody>
+  </table>
+  </div>
+</div>
+</div>
 {% endblock %}
 
 {% block javascripts %}
 
+<script>
 
+$(document).ready(function() {
+
+	var socket = io();
+	
+	socket.emit('getdelegates', {});
+	
+  	socket.on('showdelegates', function (data) { 
+  	
+  		var mainTable = document.getElementById("delegates");
+  		
+  		var tr, td;
+  	
+  		data.forEach(function(row) {
+  		
+  			tr = document.createElement("tr");
+  			
+  			td = document.createElement("td");
+  			td.innerHTML = row.username;
+  			tr.appendChild(td);
+  			
+  			maintable.appendChild(tr);
+  		
+  		});
+
+  	});
+
+});
+
+</script>
 
 {% endblock %}

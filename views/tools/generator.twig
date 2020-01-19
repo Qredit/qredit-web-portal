@@ -3,15 +3,427 @@
 {% block body %}
 
 <div class="breadcrumb">
-    <h1>Blank</h1>
+    <h1>QAE-1 JSON Generator</h1>
 </div>
-<p class="text-small text-muted text-left">Text</p>
+<p class="text-small text-muted text-left">This is a helper tool to create JSON payloads to place in the vendorField (Smartbridge) for QAE-1 Tokens.</p>
 <div class="separator-breadcrumb border-top"></div>
 
+<div class="row">
+    <div class="col-md-4">
+	    <div class="card mb-4">
+        <div class="card-body" style="">
+            <div class="card-title text-center m-0">Generator</div>
+                    <p class="text-small text-muted text-center">text</p>
+				<form id="registerForm" accept-charset="UTF-8" style="text-align: center;">
+					<div class="form-group text">
+						Your Qredit Address
+						<input type="text" id="address" class="form-control" placeholder="">
+                    </div>
+
+					<div class="form-group text">
+						Transaction Type
+						<select name="type" id="type" class="form-control" placeholder="">
+							<option value="">-- Select Transaction Type --</option>
+							<option value="GENESIS">GENESIS</option>
+							<option value="MINT">MINT</option>
+							<option value="BURN">BURN</option>
+							<option value="SEND">SEND</option>
+							<option value="PAUSE">PAUSE</option>
+							<option value="RESUME">RESUME</option>
+							<option value="NEWOWNER">NEWOWNER</option>
+						</select>
+					</div>
+
+					<div class="form-group text" id="selecttoken">
+						Select Token
+						<select name="type" id="tokenid" class="form-control" placeholder="">
+
+
+						</select>
+                    </div>
+
+					<div class="text" id="tokendetails">
+					</div>
+
+					<div class="form-group text" id="inputquantity">
+						Quantity (Actual, human readable)
+						<input type="text" id="quantity" class="form-control" placeholder="">
+					</div>
+
+					<div class="form-group text" id="inputdecimals" style="display:none;">
+						Decimal Places
+						<input type="text" id="decimals" class="form-control" placeholder="">
+					</div>
+
+					<div class="form-group text" id="inputname" style="display:none;">
+						Token Name
+						<input type="text" id="name" class="form-control" placeholder="">
+					</div>
+
+					<div class="form-group text" id="inputticker" style="display:none;">
+						Token Ticker Symbol
+						<input type="text" id="ticker" class="form-control" placeholder="">
+					</div>
+
+					<div class="form-group text" id="inputuri" style="display:none;">
+						URL Info
+						<input type="text" id="uri" class="form-control" placeholder="">
+					</div>
+
+					<div class="form-group text" id="inputnote">
+						Note:
+						<input type="text" id="note" class="form-control" placeholder="">
+					</div>
+					<button id="generate" type="button" class="btn btn-primary btn-lg">Generate Json</button>
+				</form>
+            </div>
+        </div>
+
+		    </div>
+
+
+
+    <div class="col-md-8">
+	    <div class="card mb-4">
+        <div class="card-body" style="">
+            <div class="card-title text-center m-0">Generated Smartbridge Text</div>
+                  <p class="text-small text-muted text-center">text</p>
+                <div class="row" id="recipientmaster" style="display:none; font-size:120%;">
+						<div class="col-md-6" style="text-align:right;">
+							Send to Master Address:
+                        </div>
+
+						<div class="col-md-6" style="text-align:left;">
+							<strong>QjeTQp29p9xRvTcoox4chc6jQZAHwq87JC</strong>
+                        </div>
+                </div>
+
+				<div class="row" id="recipient" style="display:none; font-size:120%">
+						<div class="col-md-6" style="text-align:right;">
+							Send to Recipient:
+						</div>
+						<div class="col-md-6" style="text-align:left;">
+							<strong>&lt;Your Intended Recipient&gt;</strong>
+						</div>
+				</div>
+
+				<div class="row" id="amount" style="font-size:120%">
+						<div class="col-md-6" style="text-align:right;">
+							XQR Send Amount:
+				        </div>
+						<div class="col-md-6" style="text-align:left;">
+							<strong>0.00000001</strong>
+						</div>
+				</div>
+
+
+                <div>
+					<br>Copy &amp; Paste Smartbridge Code:<br>
+					<textarea style="width:100%; height:75px; color:#000000;" id="jsoncode"></textarea>
+
+                <div>
+
+
+			<p class="text-center" style="color:#000000;font-size:10px;"><strong>Version:</strong> v1.0.0-QAE.1<br>
+				<br>
+				QAE IS PROVIDED AS-IS.<br>
+				<br>
+				<strong>Terms of Use:</strong><br>
+				Use at your own risk!
+				The authors of the software, Hodler Enterprises or Qredit Team, cannot retrieve your recovery phrase,
+				private
+				keys
+				or
+				passwords if you lost forget them.<br>
+				You acknowledge that the safe-keeping of your private keys is your own responsibility.<br>
+				<br>
+				<strong>No Warranty:</strong><br>
+				Qredit does not warrant for Software and supplies it on as "as-is" and "as-available" basis.<br>
+				Your Use of this software is at your own risk and under your liability. <br>
+				Qredit makes no warranty that (I) the software will meet your requirements, including providing you with
+				any
+				relevant
+				information or reaching a relevant audience and<br>
+				(II) the Software will be uninterrupted, timely, secure, or error-free and <br>
+				(III) the results that may be obtained from the Use of the Software will be accurate or reliable and<br>
+				(IV) the quality of any products, services, information or other material purchased or obtained by You
+				through
+				Software
+				will meet your expections, or<br>
+				(V) any errors in the Software will be corrected.<br>
+				<br>
+				<strong>Liability:</strong><br>
+				For no case and for no reasons shall Qredit be held liable for any damage, direct or indirect,
+				consequential,
+				exemplary,
+				physical or special, to You<br>
+				or any 3rd party due to its misperformance of duties herein.<br>
+				Qredit provides the Software on an AS-IS basis and shall not be held liable, to the extent permitted by
+				law,<br>
+				by any case of misconduct negligence, gross negligence, malice, or any other mean, to any damagers or
+				loss
+				of
+				property,
+				including damages to:<br>
+				virtual property, reputation and business reputation, user account information including login
+				information,
+				loss
+				of
+				profit, loss of good name,<br>
+				all resulting from the use or inability to use Software rendered by Qredit.</p>
+			</div>
+		</div>
+    </div>
+</div>    </div>
+</div>
+</div>
 {% endblock %}
 
 {% block javascripts %}
 
 
+	<script src="https://qredit.io/qae-assets/jquery-3.3.1.js" nonce=""></script>
+	<script src="https://qredit.io/qae-assets/mainjs.js" nonce=""></script>
+	<script src="https://qredit.io/qae-assets/functions.js" nonce=""></script>
+
+	<script nonce="">
+
+		$(function () {
+
+			Noty.overrideDefaults({
+				type: 'info',
+				theme: 'semanticui',//   'metroui','relax','mint','sunset','bootstrap-v3','bootstrap-v4','semanticui','nest'
+				layout: 'bottomLeft',
+				timeout: 4000,
+				closeWith: ['click', 'button']
+			});
+		});
+
+
+
+
+	</script>
+
+
+
+
+	<script nonce="">
+
+		var selectedToken = {};
+
+		$(document).ready(function () {
+
+
+
+			var masterQaeAddress = 'QjeTQp29p9xRvTcoox4chc6jQZAHwq87JC';
+
+
+			$("#generate").click(function () {
+
+				var transtype = $("#type").val();
+
+				if (transtype == 'GENESIS') {
+
+					//var jsontemplate = {"qae1":{"tp":"GENESIS","na":"Mike Test Token","sy":"TEST","de":4,"qt":1000000000000,"du":"https://www.qredit.io"}};
+
+					var name = $("#name").val();
+					var ticker = $("#ticker").val();
+					var quantity = $("#quantity").val();
+					var decimals = parseInt($("#decimals").val());
+					var uri = $("#uri").val();
+					var note = $("#note").val();
+
+					var expon = new Big('1e' + decimals);
+
+					var rawquantity = new Big(quantity).times(expon).toFixed(0);
+
+					var jsontemplate = { "qae1": { "tp": "GENESIS", "na": name, "sy": ticker, "de": decimals.toString(), "qt": rawquantity, "du": uri, "no": note } };
+
+					$("#jsoncode").val(JSON.stringify(jsontemplate));
+
+				}
+				else if (transtype == 'PAUSE' || transtype == 'RESUME' || transtype == 'NEWOWNER') {
+
+					//var jsontemplate = {"qae1":{"tp":"PAUSE","id":"271548887a065736f5010810ba2c8123","qt":1000000}};
+
+
+					var type = $("#type").val();
+					var tokenid = selectedToken.tokenDetails.tokenIdHex;
+					var note = $("#note").val();
+
+					var jsontemplate = { "qae1": { "tp": type, "id": tokenid, "no": note } };
+
+					$("#jsoncode").val(JSON.stringify(jsontemplate));
+
+				}
+				else {
+
+					//var jsontemplate = {"qae1":{"tp":"MINT","id":"271548887a065736f5010810ba2c8123","qt":1000000}};
+
+					var type = $("#type").val();
+					var quantity = $("#quantity").val();
+					var decimals = selectedToken.tokenDetails.decimals;
+					var tokenid = selectedToken.tokenDetails.tokenIdHex;
+					var note = $("#note").val();
+
+
+					var expon = new Big('1e' + decimals);
+
+					var rawquantity = new Big(quantity).times(expon).toFixed(0);
+
+					var jsontemplate = { "qae1": { "tp": type, "id": tokenid, "qt": rawquantity, "no": note } };
+
+					$("#jsoncode").val(JSON.stringify(jsontemplate));
+
+				}
+
+			});
+
+
+
+
+			$("#type").change(function () {
+
+				if ($(this).val() == 'GENESIS') {
+					$('#tokendetails').html('');
+					$('#inputdecimals').show();
+					$('#inputname').show();
+					$('#inputticker').show();
+					$('#inputuri').show();
+					$('#inputquantity').show();
+					$('#selecttoken').hide();
+
+				}
+				else if ($(this).val() == 'PAUSE' || $(this).val() == 'RESUME' || $(this).val() == 'NEWOWNER') {
+
+					$('#inputdecimals').val('');
+					$('#inputname').val('');
+					$('#inputticker').val('');
+					$('#inputuri').val('');
+					$('#inputquantity').val('');
+
+					$('#inputdecimals').hide();
+					$('#inputname').hide();
+					$('#inputticker').hide();
+					$('#inputuri').hide();
+					$('#inputquantity').hide();
+					$('#selecttoken').show();
+
+					$("#tokenid").change();
+
+				}
+				else {
+
+					$('#inputdecimals').val('');
+					$('#inputname').val('');
+					$('#inputticker').val('');
+					$('#inputuri').val('');
+
+					$('#inputdecimals').hide();
+					$('#inputname').hide();
+					$('#inputticker').hide();
+					$('#inputuri').hide();
+					$('#inputquantity').show();
+					$('#selecttoken').show();
+
+					$("#tokenid").change();
+
+				}
+
+				if ($(this).val() == 'SEND' || $(this).val() == 'NEWOWNER') {
+					$('#recipient').show();
+					$('#recipientmaster').hide();
+				}
+				else {
+					$('#recipient').hide();
+					$('#recipientmaster').show();
+				}
+
+			});
+
+
+			$("#address").change(function () {
+
+				var address = $('#address').val();
+
+				$('#tokenid option').remove();
+
+				$('#tokenid').append($('<option>', {
+					value: '',
+					text: '-- Select Token --'
+				}));
+
+				console.log("test");
+
+				$.ajax({
+					type: 'GET',
+					dataType: "json",
+					url: "https://qae.altilly.com/api/address/" + address,
+					success: function (data) {
+
+						console.log(data);
+
+						$.each(data, function (i, item) {
+
+							var humanbal = new Big(item.tokenBalance).div(Big(10).pow(item.tokenDecimals)).toFixed(item.tokenDecimals);
+
+							var thistext = "TokenID: " + item.tokenIdHex + " - Balance: " + humanbal + " - Owner: " + item.isOwner;
+
+							$('#tokenid').append($('<option>', {
+								value: item.tokenIdHex,
+								text: thistext
+							}));
+
+							console.log(item.tokenIdHex);
+
+							//$( "#tokenid" ).change();
+
+						});
+
+
+					}
+				});
+
+
+			});
+
+			$("#tokenid").change(function () {
+
+				var tokenid = $('#tokenid').val();
+
+				$('#tokendetails').html('');
+
+				$.ajax({
+					type: 'GET',
+					dataType: "json",
+					url: "https://qae.altilly.com/api/token/" + tokenid,
+					success: function (data) {
+
+						console.log(tokenid);
+
+						$.each(data, function (i, item) {
+
+							selectedToken = item;
+
+							//var humanbal = new Big(item.tokenBalance).div(Big(10).pow(item.tokenDecimals)).toFixed(item.tokenDecimals);
+							var currentcirc = new Big(item.tokenStats.qty_token_circulating_supply).div(Big(10).pow(item.tokenDetails.decimals)).toFixed(item.tokenDetails.decimals);
+
+							var thistext = "Type: " + item.type + "<br />Genesis Time: " + item.tokenDetails.genesis_timestamp + "<br />Symbol: " + item.tokenDetails.symbol + "<br />Name: " + item.tokenDetails.name + "<br />Uri: " + item.tokenDetails.documentUri + "<br />Decimals: " + item.tokenDetails.decimals + "<br />Circulation: " + currentcirc + "<br /><br />";
+
+							$('#tokendetails').html(thistext);
+
+
+						});
+
+
+					}
+				});
+
+			});
+
+
+
+		});
+</script>
 
 {% endblock %}

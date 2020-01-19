@@ -13,19 +13,26 @@
 <div class="separator-breadcrumb border-top"></div>
 
 
+
 <div class="card">
 <div class="card-body">
   <div class="table-responsive">
   <table class="table table-sm table-striped">
     <thead>
           <tr>
-            <th scope="col">Username</th>
+            <th scope="col">IP</th>
+            <th scope="col">P2P-Port</th>
+            <th scope="col">Wallet-API-Port</th>
+            <th scope="col">API-Port</th>
+            <th scope="col">Version</th>
+            <th scope="col">Height</th>
+            <th scope="col">Latency</th>
         </tr>
     </thead>
-    <tbody id='maintable'>
+    <tbody id='peers'>
     </tbody>
   </table>
-</div>
+  </div>
 </div>
 </div>
 {% endblock %}
@@ -33,35 +40,6 @@
 {% block javascripts %}
 
 <script>
-
-$(document).ready(function() {
-
-	var socket = io();
-	
-	socket.emit('getdelegates', {});
-	
-  	socket.on('showdelegates', function (data) { 
-  	
-  		var mainTable = document.getElementById("delegates");
-  		
-  		var tr, td;
-  	
-  		data.forEach(function(row) {
-  		
-  			tr = document.createElement("tr");
-  			
-  			td = document.createElement("td");
-  			td.innerHTML = row.username;
-  			tr.appendChild(td);
-  			
-  			maintable.appendChild(tr);
-  		
-  		});
-
-  	});
-
-});
-
 </script>
 
 {% endblock %}

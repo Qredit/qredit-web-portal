@@ -3,10 +3,31 @@
 {% block body %}
 
 <div class="breadcrumb">
-    <h1>Blank</h1>
+    <h1>Top Wallets</h1>
 </div>
 <p class="text-small text-muted text-left">Text</p>
 <div class="separator-breadcrumb border-top"></div>
+
+<div class="card">
+<div class="card-body">
+  <div class="table-responsive">
+  <table class="table table-sm table-striped">
+    <thead>
+          <tr>
+            <th scope="col">Rank</th>
+            <th scope="col">is Delegate?</th>
+            <th scope="col">Address</th>
+            <th scope="col">Balance (max 2 decimals)</th>
+            <th scope="col">% of Supply</th>
+        </tr>
+    </thead>
+    <tbody id='maintable'>
+    </tbody>
+  </table>
+  </div>
+</div>
+</div>
+
 
 {% endblock %}
 
