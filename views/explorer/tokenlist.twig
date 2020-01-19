@@ -8,10 +8,95 @@
 <p class="text-small text-muted text-left">Text</p>
 <div class="separator-breadcrumb border-top"></div>
 
+
+<div class="card">
+<div class="card-body">
+  <div class="table-responsive">
+  <table class="table table-sm table-striped">
+    <thead>
+          <tr>
+            <th scope="col">QAE Version</th>
+            <th scope="col">Token Name</th>
+            <th scope="col">Symbol</th>
+            <th scope="col">Owner Address</th>
+            <th scope="col">TokenID</th>
+            <th scope="col">Circulating Supply</th>
+            <th scope="col">Pausable</th>
+            <th scope="col">Mintable</th>
+        </tr>
+    </thead>
+    <tbody id='maintable'>
+    </tbody>
+  </table>
+</div>
+</div>
+</div>
+
+
+
+
 {% endblock %}
 
 {% block javascripts %}
 
+<script>
 
+$(document).ready(function() {
+
+	var socket = io();
+	
+	socket.emit('gettokenlist', {page:1, limit:100});
+	
+  	socket.on('qaetokenlist', function (data) { 
+  	
+  		var mainTable = document.getElementById("maintable");
+  		
+  		var tr, td;
+  	
+  		data.forEach(function(row) {
+  		
+  			tr = document.createElement("tr");
+  			
+  			td = document.createElement("td");
+  			td.innerHTML = row.version;
+  			tr.appendChild(td);
+  		
+  			td = document.createElement("td");
+  			td.innerHTML = row.name;
+  			tr.appendChild(td);
+
+  			td = document.createElement("td");
+  			td.innerHTML = row.symbol;
+  			tr.appendChild(td);
+  			
+  			td = document.createElement("td");
+  			td.innerHTML = row.owneraddress;
+  			tr.appendChild(td);
+  			
+  			td = document.createElement("td");
+  			td.innerHTML = row.tokenid;
+  			tr.appendChild(td);
+  			
+  			td = document.createElement("td");
+  			td.innerHTML = row.circsupply + ' ' + row.symbol;
+  			tr.appendChild(td);
+
+  			td = document.createElement("td");
+  			td.innerHTML = row.pausable;
+  			tr.appendChild(td);
+  			
+  			td = document.createElement("td");
+  			td.innerHTML = row.mintable;
+  			tr.appendChild(td);
+  			
+  			maintable.appendChild(tr);
+  		
+  		});
+
+  	});
+
+});
+
+</script>
 
 {% endblock %}

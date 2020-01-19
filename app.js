@@ -20,8 +20,10 @@ const asyncv3	  = require('async');
 // Qredit Libs
 const qreditjs 	= require("qreditjs"); 
 const qreditApi = require("nodeQreditApi");
+const qaeApi 	= require("nodeQaeApi");
 
 const qapi = new qreditApi.default();
+const qaeapi = new qaeApi.default();
 
 var indexRouter = require('./routes/index');
 
@@ -77,6 +79,42 @@ app.use(function(err, req, res, next) {
 // Socket IO Stuff
 
 io.on('connection', function (socket) {
+
+	socket.on('gettokenlist', function(input) {
+	
+		var page = input.page;
+		var limit = input.limit;
+		
+		(async () => {
+
+			var data = await qaeapi.listTokens(100, 1);
+			
+			var flatJson = [];
+			
+			for(let i = 0; i < data.length; i++)
+			{
+				let tempJson = {
+								version: data[i].type,
+								name: data[i].tokenDetails.name,
+								symbol: data[i].tokenDetails.symbol,
+								owneraddress: data[i].tokenDetails.ownerAddress,
+								tokenid: data[i].tokenDetails.tokenIdHex,
+								circsupply: Big(data[i].tokenStats.qty_token_circulating_supply).div(Big(10).pow(data[i].tokenDetails.decimals)).toFixed(data[i].tokenDetails.decimals),
+								pausable: data[i].tokenDetails.pausable==true?'Yes':'No',
+								mintable: data[i].tokenDetails.mintable==true?'Yes':'No'
+				
+							};
+				flatJson.push(tempJson);
+			}
+
+			socket.emit('qaetokenlist', flatJson);
+
+		})();
+	
+	});
+
+
+
 
     socket.on('getapifields', function (input) {
     
