@@ -207,6 +207,33 @@ io.on('connection', function (socket) {
 
 	// Socket IO gettransactions
 
+	socket.on('gettransactions', function (input) {
+
+		(async () => {
+
+			var response = await qapi.listTransactions();
+			var data = response.data;
+
+			var flatJson = [];
+			for (let i = 0; i < data.length; i++) {
+				let tempJson = {
+					id: data[i].id,
+					confirmations: data[i].confirmations,
+					timestamp: data[i].timestamp.human,
+					sender: data[i].sender,
+					recipient: data[i].recipient,
+					smartbridge: data[i].vendorField,
+					amount: data[i].amount,
+				};
+				flatJson.push(tempJson);
+			}
+
+			socket.emit('showtransactions', flatJson);
+
+		})();
+
+	});
+
 	// Socket IO getopwallets
 
 	socket.on('gettopwallets', function (input) {

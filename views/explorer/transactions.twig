@@ -2,52 +2,164 @@
 
 {% block body %}
 
-<div class="breadcrumb">
-    <h1>Transactions</h1>
-</div>
-<p class="text-small text-muted text-left">Text</p>
-<div class="separator-breadcrumb border-top"></div>
-  <div class="table-responsive">
-  <table class="table table-dark table-sm table-striped">
-        <thead>
-          <tr>
-            <th style="" scope="col">Block Height</th>
-            <th style="" scope="col">Last Block</th>
-            <th style="" scope="col">Forged (10 XQR out of 0 Transactions)</th>
-            <th style="" scope="col">Last Forged</th>
-			<th style="" scope="col">Next Forger</th>
+	<div class="breadcrumb">
+		<h1>Transactions</h1>
+	</div>
+	<p class="text-small text-muted text-left">Text</p>
+	<div class="separator-breadcrumb border-top"></div>
+	<div class="table-responsive">
+		<table class="table table-dark table-sm table-striped">
+			<thead>
+				<tr>
+					<th style="" scope="col">Block Height</th>
+					<th style="" scope="col">Last Block</th>
+					<th style="" scope="col">Forged (10 XQR out of 0 Transactions)</th>
+					<th style="" scope="col">Last Forged</th>
+					<th style="" scope="col">Next Forger</th>
 
-        </tr>
-        </thead>
-  </table>
-</div>
+				</tr>
+			</thead>
+		</table>
+	</div>
 
-<div class="card">
-<div class="card-body">
-  <div class="table-responsive">
-  <table class="table table-sm table-striped">
-    <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Timestamp</th>
-            <th scope="col">Sender</th>
-            <th scope="col">Recipient</th>
-            <th scope="col">Smartbridge</th>
-            <th scope="col">Amount</th>
-        </tr>
-    </thead>
-    <tbody id='transactions'>
-    </tbody>
-  </table>
-  </div>
-</div>
-</div>
+	<div class="card">
+		<div class="card-body">
+			<div class="table-responsive">
+				<table class="table table-sm table-striped">
+					<thead>
+						<tr>
+							<th scope="col">Transaction ID</th>
+							<th scope="col">Confirmations</th>
+							<th scope="col">Timestamp</th>
+							<th scope="col">Sender</th>
+							<th scope="col">Recipient</th>
+							<th scope="col">Smartbridge</th>
+							<th scope="col">Amount</th>
 
+						</tr>
+					</thead>
+					<tbody id='transactions'></tbody>
+
+				</table>
+			</div>
+		</div>
+	</div>
 
 {% endblock %}
 
+
 {% block javascripts %}
 
+	<script>
+
+		$(document).ready(function () {
+
+var socket = io();
+
+socket.emit('gettransactions', {});
 
 
+socket.on('showtransactions', function (data) {
+
+
+var mainTable = document.getElementById("transactions");
+
+
+var tr,
+td;
+
+data.forEach(function (row) {
+
+tr = document.createElement("tr");
+
+td = document.createElement("td");
+td.innerHTML = row.id;
+tr.appendChild(td);
+
+td = document.createElement("td");
+td.innerHTML = row.confirmations;
+tr.appendChild(td);
+
+td = document.createElement("td");
+td.innerHTML = timeDifference(row.timestamp);
+tr.appendChild(td);
+
+td = document.createElement("td");
+td.innerHTML = row.sender;
+tr.appendChild(td);
+
+td = document.createElement("td");
+td.innerHTML = row.recipient;
+tr.appendChild(td);
+
+td = document.createElement("td");
+td.innerHTML = row.smartbridge;
+tr.appendChild(td);
+
+td = document.createElement("td");
+td.innerHTML = row.amount;
+tr.appendChild(td);
+
+transactions.appendChild(tr);
+
+
+});
+
+});
+
+});
+
+function timeDifference(datetime) {
+
+var d = new Date();
+var current = d.getTime();
+var previous = Date.parse(datetime);
+
+var msPerMinute = 60 * 1000;
+var msPerHour = msPerMinute * 60;
+var msPerDay = msPerHour * 24;
+var msPerMonth = msPerDay * 30;
+var msPerYear = msPerDay * 365;
+
+var elapsed = current - previous;
+
+if (elapsed < msPerMinute) {
+return Math.round(elapsed / 1000) + ' seconds ago';
+} else if (elapsed < msPerHour) {
+return Math.round(elapsed / msPerMinute) + ' minutes ago';
+} else if (elapsed < msPerDay) {
+return Math.round(elapsed / msPerHour) + ' hours ago';
+} else if (elapsed < msPerMonth) {
+return 'approximately ' + Math.round(elapsed / msPerDay) + ' days ago';
+} else if (elapsed < msPerYear) {
+return 'approximately ' + Math.round(elapsed / msPerMonth) + ' months ago';
+} else {
+return 'approximately ' + Math.round(elapsed / msPerYear) + ' years ago';
+}
+}
+
+function getStatus(datetime) {
+
+var d = new Date();
+var current = d.getTime();
+var previous = Date.parse(datetime);
+
+var msPerMinute = 60 * 1000;
+var msPerHour = msPerMinute * 60;
+var msPerDay = msPerHour * 24;
+var msPerMonth = msPerDay * 30;
+var msPerYear = msPerDay * 365;
+
+var elapsed = (current - previous) / 1000;
+
+if (elapsed < (16 * 60)) {
+return '<span style="color:green;"><i class="fas fa-circle"></i><i class="fas fa-circle"></i></span>';
+} else if (elapsed < (24 * 60)) {
+return '<span style="color:orange;"><i class="fas fa-circle"></i><i class="fas fa-circle"></i></span>';
+} else {
+return '<span style="color:red;"><i class="fas fa-circle"></i><i class="fas fa-circle"></i></span>';
+}
+
+}
+	</script>
 {% endblock %}
