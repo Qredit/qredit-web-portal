@@ -127,11 +127,11 @@ td.innerHTML = row.blocks;
 tr.appendChild(td);
 
 td = document.createElement("td");
-td.innerHTML = row.timestamp;
+td.innerHTML = timeDifference(row.timestamp);
 tr.appendChild(td);
 
 td = document.createElement("td");
-td.innerHTML = row.status;
+td.innerHTML = getStatus(row.timestamp);
 tr.appendChild(td);
 
 td = document.createElement("td");
@@ -146,6 +146,72 @@ delegates.appendChild(tr);
 });
 
 });
+
+
+
+
+
+
+function timeDifference(datetime) {
+
+	var d = new Date();
+	var current = d.getTime();
+	var previous = Date.parse(datetime);
+
+    var msPerMinute = 60 * 1000;
+    var msPerHour = msPerMinute * 60;
+    var msPerDay = msPerHour * 24;
+    var msPerMonth = msPerDay * 30;
+    var msPerYear = msPerDay * 365;
+
+    var elapsed = current - previous;
+
+    if (elapsed < msPerMinute) {
+         return Math.round(elapsed/1000) + ' seconds ago';   
+    }
+    else if (elapsed < msPerHour) {
+         return Math.round(elapsed/msPerMinute) + ' minutes ago';   
+    }
+    else if (elapsed < msPerDay ) {
+         return Math.round(elapsed/msPerHour ) + ' hours ago';   
+    }
+    else if (elapsed < msPerMonth) {
+        return 'approximately ' + Math.round(elapsed/msPerDay) + ' days ago';   
+    }
+    else if (elapsed < msPerYear) {
+        return 'approximately ' + Math.round(elapsed/msPerMonth) + ' months ago';   
+    }
+    else {
+        return 'approximately ' + Math.round(elapsed/msPerYear ) + ' years ago';   
+    }
+}
+
+function getStatus(datetime) {
+
+	var d = new Date();
+	var current = d.getTime();
+	var previous = Date.parse(datetime);
+
+    var msPerMinute = 60 * 1000;
+    var msPerHour = msPerMinute * 60;
+    var msPerDay = msPerHour * 24;
+    var msPerMonth = msPerDay * 30;
+    var msPerYear = msPerDay * 365;
+
+    var elapsed = (current - previous) / 1000;
+
+    if (elapsed < (16 * 60)) {
+         return '<span style="color:green;"><i class="fas fa-circle"></i><i class="fas fa-circle"></i></span>';   
+    }
+    else if (elapsed < (24 * 60)) {
+         return '<span style="color:orange;"><i class="fas fa-circle"></i><i class="fas fa-circle"></i></span>';   
+    }
+    else {
+         return '<span style="color:red;"><i class="fas fa-circle"></i><i class="fas fa-circle"></i></span>';   
+    }
+
+}
+
 	</script>
 
 
