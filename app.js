@@ -207,7 +207,31 @@ io.on('connection', function (socket) {
 
 	// Socket IO gettransactions
 
-	// Socket IO getwallets/top  
+	// Socket IO getopwallets
+
+	socket.on('gettopwallets', function (input) {
+
+		(async () => {
+
+			var response = await qapi.getTopWallets();
+			var data = response.data;
+
+			var flatJson = [];
+			for (let i = 0; i < data.length; i++) {
+				let tempJson = {
+					rank: data[i].rank,
+					isdelegate: data[i].isDelegate == true ? '<i class="nav-icon i-Yes font-weight-bold" style="color:green;"></i>' : '<i class="nav-icon i-Close-Window font-weight-bold" style="color:red;"></i>',
+					address: data[i].address,
+					balance: data[i].balance
+				};
+				flatJson.push(tempJson);
+			}
+
+			socket.emit('showtopwallets', flatJson);
+
+		})();
+
+	});
 
 
 	// Socket IO getapifields
