@@ -73,7 +73,8 @@ data.forEach(function (row) {
 tr = document.createElement("tr");
 
 td = document.createElement("td");
-td.innerHTML = row.id;
+td.innerHTML = row.id.substr(0, 5) + '...' + row.id.substr(-5);
+// td.innerHTML = row.id;
 tr.appendChild(td);
 
 td = document.createElement("td");
@@ -93,11 +94,13 @@ td.innerHTML = row.recipient;
 tr.appendChild(td);
 
 td = document.createElement("td");
-td.innerHTML = row.smartbridge;
+td.innerHTML = row.smartbridge.substr(0, 10) + '...';
+// td.innerHTML = row.smartbridge.substr(0, 5) + '...' + row.smartbridge.substr(-5);
+// td.innerHTML = row.smartbridge;
 tr.appendChild(td);
 
 td = document.createElement("td");
-td.innerHTML = row.amount;
+td.innerHTML = (parseFloat(row.amount) / 100000000).toFixed(0);
 tr.appendChild(td);
 
 transactions.appendChild(tr);
