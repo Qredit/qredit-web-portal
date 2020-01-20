@@ -7,20 +7,21 @@
 	</div>
 	<p class="text-small text-muted text-left">Text</p>
 	<div class="separator-breadcrumb border-top"></div>
+
 	<div class="table-responsive">
 		<table class="table table-dark table-sm table-striped">
 			<thead>
 				<tr>
 					<th style="" scope="col">Block Height</th>
 					<th style="" scope="col">Last Block</th>
-					<th style="" scope="col">Forged (10 XQR out of 0 Transactions)</th>
+					<th style="" scope="col">Forged</th>
 					<th style="" scope="col">Last Forged</th>
-					<th style="" scope="col">Next Forger</th>
-
 				</tr>
 			</thead>
+			<tbody id='blocks'></tbody>
 		</table>
 	</div>
+
 
 	<div class="card">
 		<div class="card-body">
@@ -49,6 +50,49 @@
 
 
 {% block javascripts %}
+	<script>
+
+		$(document).ready(function () {
+
+var socket = io();
+
+socket.emit('getblocks', {});
+
+socket.on('showblocks', function (data) {
+
+var mainTable = document.getElementById("blocks");
+
+var tr,
+td;
+
+data.forEach(function (row) {
+
+tr = document.createElement("tr");
+
+td = document.createElement("td");
+td.innerHTML = row.height;
+tr.appendChild(td);
+
+td = document.createElement("td");
+td.innerHTML = row.id;
+tr.appendChild(td);
+
+td = document.createElement("td");
+td.innerHTML = (parseFloat(row.rewardtotal) / 100000000).toFixed(0) + ' out of ' + row.transactionsforged + ' transactions. ';
+tr.appendChild(td);
+
+td = document.createElement("td");
+td.innerHTML = row.lastforgedusername;
+tr.appendChild(td);
+
+blocks.appendChild(tr);
+
+});
+
+});
+
+});
+	</script>
 
 	<script>
 
