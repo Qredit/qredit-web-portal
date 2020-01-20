@@ -65,7 +65,7 @@ td.innerHTML = row.address;
 tr.appendChild(td);
 
 td = document.createElement("td");
-td.innerHTML = row.balance;
+td.innerHTML = (parseFloat(row.balance) / 100000000).toFixed(0);
 tr.appendChild(td);
 
 topwallet.appendChild(tr);
