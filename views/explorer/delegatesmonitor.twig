@@ -79,7 +79,7 @@ td.innerHTML = row.id;
 tr.appendChild(td);
 
 td = document.createElement("td");
-td.innerHTML = row.rewardtotal + ' out of ' + row.transactionsforged + ' transactions. ';
+td.innerHTML = (parseFloat(row.rewardtotal)/100000000).toFixed(0) + ' out of ' + row.transactionsforged + ' transactions. ';
 tr.appendChild(td);
 
 td = document.createElement("td");
