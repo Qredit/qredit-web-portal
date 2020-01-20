@@ -180,6 +180,31 @@ io.on('connection', function (socket) {
 
 	// Socket IO getpeers
 
+	socket.on('getpeers', function (input) {
+
+		(async () => {
+
+			var response = await qapi.getPeers();
+			var data = response.data;
+
+			var flatJson = [];
+			for (let i = 0; i < data.length; i++) {
+				let tempJson = {
+					peerip: data[i].ip,
+					p2pport: data[i].port,
+					version: data[i].version,
+					height: data[i].height,
+					latency: data[i].latency
+				};
+				flatJson.push(tempJson);
+			}
+
+			socket.emit('showpeers', flatJson);
+
+		})();
+
+	});
+
 	// Socket IO gettransactions
 
 	// Socket IO getwallets/top  

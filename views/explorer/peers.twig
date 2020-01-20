@@ -1,45 +1,89 @@
 {% extends 'layout_main.twig' %}
 
 {% block body %}
-<style>
-.table td, .table th{
-	text-align:center;
-}
-</style>
-<div class="breadcrumb">
-    <h1>Peers</h1>
-</div>
-<p class="text-small text-muted text-left">Text</p>
-<div class="separator-breadcrumb border-top"></div>
+	<style>
+		.table td,
+		.table th {
+			text-align: center;
+		}
+	</style>
+	<div class="breadcrumb">
+		<h1>Peers</h1>
+	</div>
+	<p class="text-small text-muted text-left">Text</p>
+	<div class="separator-breadcrumb border-top"></div>
 
 
-
-<div class="card">
-<div class="card-body">
-  <div class="table-responsive">
-  <table class="table table-sm table-striped">
-    <thead>
-          <tr>
-            <th scope="col">IP</th>
-            <th scope="col">P2P-Port</th>
-            <th scope="col">Wallet-API-Port</th>
-            <th scope="col">API-Port</th>
-            <th scope="col">Version</th>
-            <th scope="col">Height</th>
-            <th scope="col">Latency</th>
-        </tr>
-    </thead>
-    <tbody id='peers'>
-    </tbody>
-  </table>
-  </div>
-</div>
-</div>
+	<div class="card">
+		<div class="card-body">
+			<div class="table-responsive">
+				<table class="table table-sm table-striped">
+					<thead>
+						<tr>
+							<th scope="col">IP</th>
+							<th scope="col">P2P-Port</th>
+							<th scope="col">Version</th>
+							<th scope="col">Height</th>
+							<th scope="col">Latency</th>
+						</tr>
+					</thead>
+					<tbody id='peers'></tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 {% endblock %}
 
 {% block javascripts %}
 
-<script>
-</script>
+	<script>
+
+		$(document).ready(function () {
+
+var socket = io();
+
+socket.emit('getpeers', {});
+
+socket.on('showpeers', function (data) {
+
+var mainTable = document.getElementById("peers");
+
+var tr,
+td;
+
+data.forEach(function (row) {
+
+tr = document.createElement("tr");
+
+td = document.createElement("td");
+td.innerHTML = row.peerip;
+tr.appendChild(td);
+
+td = document.createElement("td");
+td.innerHTML = row.p2pport;
+tr.appendChild(td);
+
+td = document.createElement("td");
+td.innerHTML = row.version;
+tr.appendChild(td);
+
+td = document.createElement("td");
+td.innerHTML = row.height;
+tr.appendChild(td);
+
+td = document.createElement("td");
+td.innerHTML = row.latency;
+tr.appendChild(td);
+
+
+peers.appendChild(tr);
+
+});
+
+});
+
+});
+	</script>
+
 
 {% endblock %}
