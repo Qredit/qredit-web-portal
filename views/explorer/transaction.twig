@@ -40,7 +40,7 @@ $(document).ready(function () {
 
 	var socket = io();
 
-	socket.emit('gettransactiondetails', { transaction: {{ transactionId }} );
+	socket.emit('gettransactiondetails', {transactionId: {{ transactionId }}} );
 
 	socket.on('showtransactiondetails', function (data) {
 

@@ -86,24 +86,24 @@ router.get("/explorer/delegatesmonitor", function (req, res, next) {
 });
 /* URL Parameter routes*/
 
-/*router.get('/explorer/transaction/:transactionId', function (req, res) {
+router.get('/explorer/transaction/:transactionId', function (req, res) {
   console.log(req.transactionId)
-})*/
+})
 
- router.get('/explorer/transaction/:transactionId', function (req, res) {
+ /* router.get('/explorer/transaction/:transactionId', function (req, res) {
   console.log(req.params)
   res.render("explorer/transaction", {
     title: "Transaction Details",
     routename: "transactionId",
     csrfToken: req.csrfToken()
   });
-}); 
+}); */
 
 /* GET tools page. */
-router.get("/tools/batchsender", function (req, res, next) {
-  res.render("tools/batchsender", {
-    title: "batchsender",
-    routename: "batchsender",
+router.get("/tools/bulksender", function (req, res, next) {
+  res.render("tools/bulksender", {
+    title: "bulksender",
+    routename: "bulksender",
     csrfToken: req.csrfToken()
   });
 });
