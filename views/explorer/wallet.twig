@@ -1,0 +1,137 @@
+{% extends 'layout_main.twig' %}
+
+{% block body %}
+
+	<div class="breadcrumb">
+		<h1>Wallet Summary</h1>
+	</div>
+<button class="btn btn-sm btn-danger text-white btn-rounded" onclick="goBack()">Go Back</button>
+
+	<div class="separator-breadcrumb border-top"></div>
+
+<!-- The button used to copy the text -->
+ 
+
+	<div class="card" style="background-color:#5b5164;">
+		<div class="card-body">
+		<h5 style="color:#cacaca;">Wallet Address</h5>
+				<h4 class="text center" style="color:#fff;">{{ walletId }} <button-txid data-animation="true" data-trigger="click" data-toggle="tooltip" data-placement="top" data-original-title="Copied to clipboard!" data-original-title="null"><img src="data:image/svg+xml;base64,PHN2ZwogeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIgogeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiCiB3aWR0aD0iMTZweCIgaGVpZ2h0PSIxOXB4Ij4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiAgZmlsbD0icmdiKDExOSwgMTIyLCAxMzIpIgogZD0iTTExLjAwMCwtMC4wMDAgTDEuOTk5LC0wLjAwMCBDMC44OTksLTAuMDAwIC0wLjAwMCwwLjk0MSAtMC4wMDAsMi4wOTEgTC0wLjAwMCwxMy4wMDAgTDEuOTk5LDEzLjAwMCBMMS45OTksMi4wMDAgTDExLjAwMCwyLjAwMCBMMTEuMDAwLC0wLjAwMCBaTTE0LjAwMCwzLjk5NCBMNS45OTksMy45OTQgQzQuOTAwLDMuOTk0IDMuOTk5LDQuOTQ0IDMuOTk5LDYuMTA2IEwzLjk5OSwxNi44ODggQzMuOTk5LDE4LjA0OSA0LjkwMCwxOS4wMDAgNS45OTksMTkuMDAwIEwxNC4wMDAsMTkuMDAwIEMxNS4wOTksMTkuMDAwIDE2LjAwMCwxOC4wNDkgMTYuMDAwLDE2Ljg4OCBMMTYuMDAwLDYuMTA2IEMxNi4wMDAsNC45NDQgMTUuMDk5LDMuOTk0IDE0LjAwMCwzLjk5NCBaTTE0LjAwMCwxNy4wMDAgTDUuOTk5LDE3LjAwMCBMNS45OTksNi4wMDAgTDE0LjAwMCw2LjAwMCBMMTQuMDAwLDE3LjAwMCBaIi8+Cjwvc3ZnPg==" class="block"></button-txid>
+		</div>
+	</div>
+<br>
+	<div class="card">
+		<div class="card-body">
+			<div class="table-responsive">
+				<table class="table table-sm table-striped">
+					<thead>
+						<tr>
+							<th scope="col">ID</th>
+							<th scope="col">Timestamp</th>
+							<th scope="col">Sender</th>
+							<th scope="col">Recipient</th>
+							<th scope="col">Amount (XQR)</th>
+							<th scope="col">Amount (QAE Tokens)</th>
+							<th scope="col">Smartbridge</th>
+							<th scope="col">Confirmations</th>
+						</tr>
+					</thead>
+					<tbody id='walletId'>
+					
+					
+					
+					
+					</tbody>
+
+				</table>
+				
+			</div>
+		</div>
+	</div> 
+
+{% endblock %}
+
+
+{% block javascripts %}
+
+<script>
+
+$(document).ready(function () {
+
+	var socket = io();
+
+	socket.emit('gettransactiondetails', {walletId: '{{ walletId }}'} );
+
+	socket.on('showtransactiondetails', function (data) {
+
+		var mainTable = document.getElementById("transactiondetails");
+		var tr, td;
+
+		for(var k in data)
+		{
+
+			tr = document.createElement("tr");
+			
+			td = document.createElement("td");
+			td.innerHTML = k;
+			tr.appendChild(td);
+			
+			td = document.createElement("td");
+			td.innerHTML = data[k];
+			tr.appendChild(td);
+
+			transactiondetails.appendChild(tr);
+
+		};
+
+
+	});
+
+});
+
+</script>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("button-txid").click(function (event) {
+                event.preventDefault();
+                CopyToClipboard("{{ transactionId }}", true, "Value copied");
+            });
+        });
+
+        function CopyToClipboard(value, showNotification, notificationText) {
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val(value).select();
+            document.execCommand("copy");
+            $temp.remove();
+
+            if (typeof showNotification === 'undefined') {
+                showNotification = true;
+            }
+            if (typeof notificationText === 'undefined') {
+                notificationText = "Copied to clipboard";
+            }
+
+            var notificationTag = $("div.copy-notification");
+            if (showNotification && notificationTag.length == 0) {
+                notificationTag = $("<div/>", { "class": "copy-notification", text: notificationText });
+                $("body").append(notificationTag);
+
+                notificationTag.fadeIn("slow", function () {
+                    setTimeout(function () {
+                        notificationTag.fadeOut("slow", function () {
+                            notificationTag.remove();
+                        });
+                    }, 1000);
+                });
+            }
+        }
+    </script>
+<script src="/javascripts/tooltip.script.js"></script>
+{% endblock %}

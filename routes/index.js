@@ -221,6 +221,15 @@ router.get("/explorer/transaction/:transactionId", function (req, res, next) {
   });
 });
 
+router.get("/explorer/wallet/:walletId", function (req, res, next) {
+  res.render("explorer/wallet", {
+    title: "Wallet Details",
+    routename: "sender",
+    walletId: req.params.walletId,
+    csrfToken: req.csrfToken()
+  });
+});
+
 router.get("/explorer/token/:tokenid", function (req, res, next) {
   res.render("explorer/token", {
     title: "Token Details",

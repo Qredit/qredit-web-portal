@@ -2,28 +2,42 @@
 
 {% block body %}
 
+<style>
+.table-dark td, .table-dark th, .table-dark thead th {
+	background-color: #5b5164;
+}
+.table-dark {
+	background-color: #5b5164;
+}
+</style>
+
 	<div class="breadcrumb">
 		<h1>Transactions</h1>
 	</div>
 	
-	<p class="text-small text-muted text-left">Text</p>
+	<p class="text-small text-muted text-left">Latest Transactions and Blocks</p>
 	<div class="separator-breadcrumb border-top"></div>
 
+	<div class="card" style="background-color:#5b5164;">
+	<div class="card-body" style="padding:10px; padding-bottom:0px;">
 	<div class="table-responsive">
 		<table class="table table-dark table-sm table-striped">
 			<thead>
 				<tr>
-					<th style="" scope="col">Block Height</th>
-					<th style="" scope="col">Last Block</th>
-					<th style="" scope="col">Forged</th>
-					<th style="" scope="col">Last Forged</th>
+					<th style="background-color:#5b5164;" scope="col">Block Height</th>
+					<th style="background-color:#5b5164;" scope="col">Last Block</th>
+					<th style="background-color:#5b5164;" scope="col">Forged</th>
+					<th style="background-color:#5b5164;" scope="col">Last Forged</th>
+					<th style="background-color:#5b5164;" scope="col">Marketcap</th>
+					<th style="background-color:#5b5164;" scope="col">Total Supply</th>
 				</tr>
 			</thead>
 			<tbody id='blocks'></tbody>
 		</table>
 	</div>
-
-
+	</div>
+</div>
+<br>
 	<div class="card">
 		<div class="card-body">
 			<div class="table-responsive">
@@ -36,7 +50,8 @@
 							<th scope="col">Sender</th>
 							<th scope="col">Recipient</th>
 							<th scope="col">Smartbridge</th>
-							<th scope="col">Amount</th>
+							<th scope="col">Amount (XQR)</th>
+							<th scope="col">Amount (QAE)</th>
 
 						</tr>
 					</thead>
@@ -130,11 +145,11 @@ td.innerHTML = timeDifference(row.timestamp);
 tr.appendChild(td);
 
 td = document.createElement("td");
-td.innerHTML = row.sender;
+td.innerHTML = '<a href="/explorer/wallet/' + row.sender + '">' + row.sender + '</a>';
 tr.appendChild(td);
 
 td = document.createElement("td");
-td.innerHTML = row.recipient;
+td.innerHTML = '<a href="/explorer/wallet/' + row.recipient + '">' + row.recipient + '</a>';
 tr.appendChild(td);
 
 td = document.createElement("td");

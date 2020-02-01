@@ -252,27 +252,26 @@ io.on('connection', function (socket) {
 				var data = flatten(response.data);
 
 				var tempJson = {
-					id: data['id'],
+					'Transaction ID': data['id'],
 					'Block ID': data['blockId'],
 					Amount: data['amount'],
 					Fee: data['fee'],
 					Sender: data['sender'],
 					'Public Key': data['senderPublicKey'],
-					recipient: data['recipient'],
-					signature: data['signature'],
+					Recipient: data['recipient'],
 					Smartbridge: data['vendorField'],
 					Confirmations: data['confirmations'],
-					timestamp: data['timestamp.human'],
-					qae_blockHeight: data['qae.blockHeight'],
-					qae_valid: data['qae.valid'],
-					qae_invalidReason: data['qae.invalidReason'],
-					qae_transactionType: data['qae.transactionDetails.transactionType'],
-					qae_tokenIdHex: data['qae.transactionDetails.tokenIdHex'],
-					qae_symbol: data['qae.transactionDetails.symbol'],
-					qae_name: data['qae.transactionDetails.name'],
-					qae_documentUri: data['qae.transactionDetails.documentUri'],
-					qae_decimals: data['qae.transactionDetails.decimals'],
-					qae_amount: Big(data['qae.transactionDetails.sendOutput.amount']).div(Big(10).pow(data['qae.transactionDetails.decimals'])).toFixed(data['qae.transactionDetails.decimals'])
+					Timestamp: data['timestamp.human'],
+					'Block Height': data['qae.blockHeight'],
+					'QAE Valid Transaction': data['qae.valid'] == true ? '<i class="nav-icon i-Yes font-weight-bold"style="color:green;"></i>' : '<i class="nav-icon i-Close-Window font-weight-bold" style="color:red;"></i>',
+					'QAE Invalid Reason': data['qae.invalidReason'],
+					'QAE Transaction Type': data['qae.transactionDetails.transactionType'],
+					'QAE Token ID': data['qae.transactionDetails.tokenIdHex'],
+					'QAE Token Symbol': data['qae.transactionDetails.symbol'],
+					'QAE Token Name': data['qae.transactionDetails.name'],
+					'QAE Document URL': data['qae.transactionDetails.documentUri'],
+					'QAE Decimals': data['qae.transactionDetails.decimals'],
+					'QAE Amount': Big(data['qae.transactionDetails.sendOutput.amount']).div(Big(10).pow(data['qae.transactionDetails.decimals'])).toFixed(data['qae.transactionDetails.decimals'])
 				};
 
 
