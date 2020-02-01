@@ -210,6 +210,15 @@ router.get("/blog", function (req, res, next) {
   });
 });
 
+/* GET shops page. */
+router.get("/stores", function (req, res, next) {
+  res.render("stores", {
+    title: "Stores",
+    routename: "stores",
+    csrfToken: req.csrfToken()
+  });
+});
+
 /* Explorer URL Parameter routes*/
 
 router.get("/explorer/transaction/:transactionId", function (req, res, next) {

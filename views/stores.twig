@@ -1,0 +1,97 @@
+{% extends 'layout_main.twig' %}
+
+{% block body %}
+
+<style>
+.table td {
+    text-align: center;
+}
+
+.table tr {
+    text-align: center;
+}
+</style>
+
+
+<div class="breadcrumb">
+    <h1>Stores</h1>
+</div>
+<p class="text-small text-muted text-left">An overview of online and physical stores that have Qredit integrated.</p>
+<div class="separator-breadcrumb border-top"></div>
+    <div class="text-center" style="margin-right: 10px;"> Do you want to become a verified reseller or list your store on this page? Contact us by clicking on the button right!
+        <a class="btn btn-sm btn-success text-white btn-rounded"
+            href="https://qredit.io/contact"
+            target="_blank">Contact us!</a>
+
+    </div>
+<br>
+<div class="card">
+<div class="card-body">
+
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Verification</th>
+                                            <th scope="col">Store Name</th>
+                                            <th scope="col">Country</th>
+                                            <th scope="col">Type</th>
+                                            <th scope="col">Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><a class="" href="/explorer/wallet/QXcPMXiHx2cZ8RGmFCu8yUCWFMxMiLGv1H"><i class="nav-icon i-Shield font-weight-bold" data-toggle="tooltip" data-placement="top" data-original-title="Verified with Persona - Tier 5" style="color:green;"></a></i><i class="nav-icon i-Security-Check font-weight-bold" data-toggle="tooltip" data-placement="top" data-original-title="Verified Qredit Reseller - Supports Fiat and Crypto" style="color:green;"></i></td>
+                                            <th scope="row"><a href="https://mcblack.se" target="_blank">McBläck </a> </th>
+                                            <td> <div class="logo"> <img src="/images/country/sweden.svg" style="max-width:18px;"></div></td>
+                                            <td>Physical & Online</td>
+                                            <td>Sales and repairs of printers, ink cartridges and toners.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a class="" href="/explorer/wallet/QXcPMXiHx2cZ8RGmFCu8yUCWFMxMiLGv1H"><i class="nav-icon i-Shield font-weight-bold" data-toggle="tooltip" data-placement="top" data-original-title="Verified with Persona" style="color:green;"></a></td>
+                                            <th scope="row"><a href="https://solleftea24.se" target="_blank">Sollefteå24</a></th>
+                                            <td> <div class="logo"> <img src="/images/country/sweden.svg" style="max-width:18px;"></div></td>
+                                            <td>Online</td>
+                                            <td>24 hours delivery service in Sollefteå region.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a class="" href="/explorer/wallet/QXcPMXiHx2cZ8RGmFCu8yUCWFMxMiLGv1H"><i class="nav-icon i-Shield font-weight-bold" data-toggle="tooltip" data-placement="top" data-original-title="Verified with Persona" style="color:green;"></a></td>
+                                            <th scope="row"><a href="https://voyagerpark.se" target="_blank">Voyager Park</a></th>
+                                            <td> <div class="logo"> <img src="/images/country/sweden.svg" style="max-width:18px;"></div></td>
+                                            <td>Physical</td>
+                                            <td>Tourist resort in the North of Sweden.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a class="" href="/explorer/wallet/#"><i class="nav-icon i-Shield font-weight-bold" data-toggle="tooltip" data-placement="top" data-original-title="Verified with Persona" style="color:green;"></a></td>
+                                            <th scope="row"><a href="https://valize.rocks" target="_blank">vGraphix</a></th>
+                                            <td> <div class="logo"> <img src="/images/country/netherlands.svg" style="max-width:18px;"></div></td>
+                                            <td>Online</td>
+                                            <td>Webdesign.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a class="" href="/explorer/wallet/#"><i class="nav-icon i-Shield font-weight-bold" data-toggle="tooltip" data-placement="top" data-original-title="Verified with Persona" style="color:green;"></a></td>
+                                            <th scope="row"><a href="https://valize.rocks" target="_blank">Lewis</a></th>
+                                            <td> <div class="logo"> <img src="/images/country/ghana.svg" style="max-width:18px;"></div></td>
+                                            <td>Online</td>
+                                            <td>Graphical Design, Telegram & Whatsapp Stickers, Animated design.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+
+                        </div>
+</div></div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    
+
+<script src="/javascripts/tooltip.script.js"></script>
+<script src="/javascripts/vendor/echarts.min.js"></script>
+<script src="/javascripts/es5/echart.options.min.js"></script>
+<script src="/javascripts/es5/dashboard.v1.script.js"></script>
+
+{% endblock %}
