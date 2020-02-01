@@ -243,24 +243,40 @@ io.on('connection', function (socket) {
 				
 				var qaedata = await qaeapi.getTransaction(input.transactionId);
 				
-				if (qaedata.length > 0)
+				if (qaedata)
 				{
 					response.data.qae = qaedata[0];
 				}
-				
-				var flatJson = flatten(response.data);
 
-/*
-				var data = response.data;
-				var flatJson = [];
-				for (let i = 0; i < data.length; i++) {
-					let tempJson = {
-						id: data[i].id,
-					};
-					flatJson.push(tempJson);
-				}
-*/
-				socket.emit('showtransactiondetails', flatJson);
+
+				var data = flatten(response.data);
+
+				var tempJson = {
+					id: data['id'],
+					blockId: data['blockId'],
+					amount: data['amount'],
+					fee: data['fee'],
+					sender: data['sender'],
+					senderPublicKey: data['senderPublicKey'],
+					recipient: data['recipient'],
+					signature: data['signature'],
+					vendorField: data['vendorField'],
+					confirmations: data['confirmations'],
+					timestamp: data['timestamp.human'],
+					qae_blockHeight: data['qae.blockHeight'],
+					qae_valid: data['qae.valid'],
+					qae_invalidReason: data['qae.invalidReason'],
+					qae_transactionType: data['qae.transactionDetails.transactionType'],
+					qae_tokenIdHex: data['qae.transactionDetails.tokenIdHex'],
+					qae_symbol: data['qae.transactionDetails.symbol'],
+					qae_name: data['qae.transactionDetails.name'],
+					qae_documentUri: data['qae.transactionDetails.documentUri'],
+					qae_decimals: data['qae.transactionDetails.decimals'],
+					qae_amount: Big(data['qae.transactionDetails.sendOutput.amount']).div(Big(10).pow(data['qae.transactionDetails.decimals'])).toFixed(data['qae.transactionDetails.decimals'])
+				};
+
+
+				socket.emit('showtransactiondetails', tempJson);
 	
 			})();
 	
