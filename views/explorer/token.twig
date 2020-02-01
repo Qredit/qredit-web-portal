@@ -10,22 +10,32 @@
 
 
 
+	<div class="separator-breadcrumb border-top"></div>
+	<p class="text-small text-muted left">{{ tokenid }}</p>
 	<div class="card">
 		<div class="card-body">
 			<div class="table-responsive">
 				<table class="table table-sm table-striped">
 					<thead>
 						<tr>
-							<th scope="col">Transaction ID</th>
-							<th scope="col">Confirmations</th>
+							<th scope="col">Data</th>
+							<th scope="col">Output</th>
 						</tr>
 					</thead>
-					<tbody id='transaction'></tbody>
+					<tbody id='maintable'>
+					
+					
+					
+					
+					</tbody>
 
 				</table>
+				
 			</div>
 		</div>
 	</div>
+
+	{{ tokenid }}
 
 {% endblock %}
 
@@ -33,50 +43,38 @@
 {% block javascripts %}
 
 
-	<script>
-var getJSON = function(url, callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.responseType = 'json';
-    xhr.onload = function() {
-      var status = xhr.status;
-      if (status === 200) {
-        callback(null, xhr.response);
-      } else {
-        callback(status, xhr.response);
-      }
-    };
-    xhr.send();
-};
+<script>
 
-var url = "https://qae.qredit.cloud/api/token/"
+$(document).ready(function() {
 
-const params = new URLSearchParams(document.location.search);
-const tokenid = params.get("tokenid");
+	var socket = io();
+	
+	socket.emit('gettokeninfo', {tokenid: '{{ tokenid }}'} );
+	
+  	socket.on('showtokeninfo', function (data) { 
+  	
+  		var mainTable = document.getElementById("maintable");
+  		var tr, td;
 
-getJSON(url + tokenid, function(err, data) {
+  		data.forEach(function(row) {
+  		
+  			tr = document.createElement("tr");
+  			
+  			td = document.createElement("td");
+  			td.innerHTML = row.symbol;
+			tr.appendChild(td);
+			  
+  		  	td = document.createElement("td");
+  			td.innerHTML = row.paused;
+  			tr.appendChild(td);
+  			
+  			maintable.appendChild(tr);
+  		
+  		});
 
-
-var mainTable = document.getElementById("transaction");
-
-
-var tr,
-td;
-
-data.forEach(function (row) {
-
-tr = document.createElement("tr");
-
-td = document.createElement("td");
-td.innerHTML = row.paused;
-tr.appendChild(td);
-
-transaction.appendChild(tr);
+  	});
 
 });
 
-});
-
-
-	</script>
+</script>
 {% endblock %}

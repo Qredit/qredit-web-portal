@@ -268,27 +268,30 @@ io.on('connection', function (socket) {
 
 // Socket IO gettokeninfo
 
-		socket.on('gettokeninfo', function (input) {
+			socket.on('gettokeninfo', function (input) {
 
-			(async () => {
-			
-				var response = await qaeapi.getToken();
-				var data = response.data;
+				var page = input.page;
+				var limit = input.limit;
 		
-				var flatJson = [];
-				for (let i = 0; i < data.length; i++) {
-					let tempJson = {
-						id: data[i].id,
-					};
-					flatJson.push(tempJson);
-				}
-			
-				socket.emit('showtokeninfo', flatJson);
-			
-			})();
-			
-		});
-
+				(async () => {
+		
+					var data = await qaeapi.getTransaction(input.tokenid);
+		
+					var flatJson = [];
+		
+					for (let i = 0; i < data.length; i++) {
+						let tempJson = {
+							symbol: data[i].symbol,
+							paused: data[i].paused,
+						};
+						flatJson.push(tempJson);
+					}
+		
+					socket.emit('showtokeninfo', flatJson);
+		
+				})();
+		
+			});
 	// Socket IO gettopwallets
 
 	socket.on('gettopwallets', function (input) {

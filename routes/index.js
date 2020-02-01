@@ -84,27 +84,6 @@ router.get("/explorer/delegatesmonitor", function (req, res, next) {
     csrfToken: req.csrfToken()
   });
 });
-/* URL Parameter routes*/
-
-router.get("/explorer/transaction/:transactionId", function (req, res, next) {
-  res.render("explorer/transaction", {
-    title: "transaction",
-    routename: "transaction",
-    transactionId: req.params.transactionId,
-    csrfToken: req.csrfToken()
-  });
-});
-
-
-
- /* router.get('/explorer/transaction/:transactionId', function (req, res) {
-  console.log(req.params)
-  res.render("explorer/transaction", {
-    title: "Transaction Details",
-    routename: "transactionId",
-    csrfToken: req.csrfToken()
-  });
-}); */
 
 /* GET tools page. */
 router.get("/tools/bulksender", function (req, res, next) {
@@ -230,5 +209,27 @@ router.get("/blog", function (req, res, next) {
     csrfToken: req.csrfToken()
   });
 });
+
+/* Explorer URL Parameter routes*/
+
+router.get("/explorer/transaction/:transactionId", function (req, res, next) {
+  res.render("explorer/transaction", {
+    title: "Transaction Details",
+    routename: "transaction",
+    transactionId: req.params.transactionId,
+    csrfToken: req.csrfToken()
+  });
+});
+
+router.get("/explorer/token/:tokenid", function (req, res, next) {
+  res.render("explorer/token", {
+    title: "Token Details",
+    routename: "token",
+    tokenid: req.params.tokenid,
+    csrfToken: req.csrfToken()
+  });
+});
+
+
 
 module.exports = router;

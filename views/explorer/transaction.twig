@@ -3,21 +3,20 @@
 {% block body %}
 
 	<div class="breadcrumb">
-		<h1>Transaction</h1>
+		<h1>Transaction Details</h1>
 	</div>
-	<p class="text-small text-muted text-left">Text</p>
+<button class="btn btn-sm btn-danger text-white btn-rounded" onclick="goBack()">Go Back</button>
+
 	<div class="separator-breadcrumb border-top"></div>
-
-
-
+	<p class="text-small text-muted left">{{ transactionId }}</p>
 	<div class="card">
 		<div class="card-body">
 			<div class="table-responsive">
 				<table class="table table-sm table-striped">
 					<thead>
 						<tr>
-							<th scope="col">Transaction ID</th>
-							<th scope="col">Confirmations</th>
+							<th scope="col">Data</th>
+							<th scope="col">Output</th>
 						</tr>
 					</thead>
 					<tbody id='transactiondetails'>
@@ -75,5 +74,11 @@ $(document).ready(function () {
 
 });
 
+</script>
+
+<script>
+function goBack() {
+  window.history.back();
+}
 </script>
 {% endblock %}
