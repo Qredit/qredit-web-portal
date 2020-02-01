@@ -67,7 +67,7 @@ $(document).ready(function() {
   		
   			td = document.createElement("td");
 			td.innerHTML = row.name;
-			td.innerHTML = '<a href="localhost:8080/explorer/wallets/?name=' + row.name + '">' + row.name + '</a>';
+			td.innerHTML = '<a href="/explorer/token/' + row.tokenid + '">' + row.name + '</a>';
   			tr.appendChild(td);
 
   			td = document.createElement("td");
@@ -75,12 +75,12 @@ $(document).ready(function() {
   			tr.appendChild(td);
   			
   			td = document.createElement("td");
-			td.innerHTML = '<a href="localhost:8080/explorer/wallets/?address=' + row.owneraddress + '">' + row.owneraddress.substr(0, 5) + '...' + row.owneraddress.substr(-5) + '</a>';
+			td.innerHTML = '<a href="/explorer/wallets/' + row.owneraddress + '">' + row.owneraddress.substr(0, 5) + '...' + row.owneraddress.substr(-5) + '</a>';
   			tr.appendChild(td);
   			
   			td = document.createElement("td");
 			//td.innerHTML = row.tokenid;
-			td.innerHTML = '<a href="localhost:8080/explorer/token/?tokenid=' + row.tokenid + '">' + row.tokenid.substr(0, 5) + '...' + row.tokenid.substr(-5) + '</a>';
+			td.innerHTML = '<a href="/explorer/token/' + row.tokenid + '">' + row.tokenid.substr(0, 5) + '...' + row.tokenid.substr(-5) + '</a>';
   			tr.appendChild(td);
   			
   			td = document.createElement("td");

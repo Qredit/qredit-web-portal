@@ -51,35 +51,35 @@ router.get("/wallet/delete", function (req, res, next) {
 /* GET explorer page. */
 router.get("/explorer/transactions", function (req, res, next) {
   res.render("explorer/transactions", {
-    title: "transactions",
+    title: "Transactions",
     routename: "transactions",
     csrfToken: req.csrfToken()
   });
 });
 router.get("/explorer/tokenlist", function (req, res, next) {
   res.render("explorer/tokenlist", {
-    title: "tokenlist",
+    title: "Token List",
     routename: "tokenlist",
     csrfToken: req.csrfToken()
   });
 });
 router.get("/explorer/peers", function (req, res, next) {
   res.render("explorer/peers", {
-    title: "peers",
+    title: "Peers",
     routename: "peers",
     csrfToken: req.csrfToken()
   });
 });
 router.get("/explorer/topwallets", function (req, res, next) {
   res.render("explorer/topwallets", {
-    title: "topwallets",
+    title: "Top Wallets",
     routename: "topwallets",
     csrfToken: req.csrfToken()
   });
 });
 router.get("/explorer/delegatesmonitor", function (req, res, next) {
   res.render("explorer/delegatesmonitor", {
-    title: "delegatesmonitor",
+    title: "Delegates Monitor",
     routename: "delegatesmonitor",
     csrfToken: req.csrfToken()
   });
@@ -88,56 +88,56 @@ router.get("/explorer/delegatesmonitor", function (req, res, next) {
 /* GET tools page. */
 router.get("/tools/bulksender", function (req, res, next) {
   res.render("tools/bulksender", {
-    title: "bulksender",
+    title: "Qredit Bulk Sender",
     routename: "bulksender",
     csrfToken: req.csrfToken()
   });
 });
 router.get("/tools/delegateapp", function (req, res, next) {
   res.render("tools/delegateapp", {
-    title: "delegateapp",
+    title: "Delegate App",
     routename: "delegateapp",
     csrfToken: req.csrfToken()
   });
 });
 router.get("/tools/desktopapp", function (req, res, next) {
   res.render("tools/desktopapp", {
-    title: "desktopapp",
+    title: "Desktop App",
     routename: "desktopapp",
     csrfToken: req.csrfToken()
   });
 });
 router.get("/tools/generator", function (req, res, next) {
   res.render("tools/generator", {
-    title: "generator",
+    title: "QAE Generator",
     routename: "generator",
     csrfToken: req.csrfToken()
   });
 });
 router.get("/tools/mobileapp", function (req, res, next) {
   res.render("tools/mobileapp", {
-    title: "mobileapp",
+    title: "Qredit Mobile App",
     routename: "mobileapp",
     csrfToken: req.csrfToken()
   });
 });
 router.get("/tools/paperwallet", function (req, res, next) {
   res.render("tools/paperwallet", {
-    title: "paperwallet",
+    title: "Paper Wallet",
     routename: "paperwallet",
     csrfToken: req.csrfToken()
   });
 });
 router.get("/tools/qds", function (req, res, next) {
   res.render("tools/qds", {
-    title: "qds",
+    title: "Qredit Data Server",
     routename: "qds",
     csrfToken: req.csrfToken()
   });
 });
 router.get("/tools/voting", function (req, res, next) {
   res.render("tools/voting", {
-    title: "voting",
+    title: "Voting",
     routename: "voting",
     csrfToken: req.csrfToken()
   });
@@ -146,49 +146,49 @@ router.get("/tools/voting", function (req, res, next) {
 /* GET docs page. */
 router.get("/docs/apidocs", function (req, res, next) {
   res.render("docs/apidocs", {
-    title: "apidocs",
+    title: "API Docs",
     routename: "apidocs",
     csrfToken: req.csrfToken()
   });
 });
 router.get("/docs/docsdelegates", function (req, res, next) {
   res.render("docs/docsdelegates", {
-    title: "docsdelegates",
+    title: "Delegate Documentation",
     routename: "docsdelegates",
     csrfToken: req.csrfToken()
   });
 });
 router.get("/docs/exchangeintegration", function (req, res, next) {
   res.render("docs/exchangeintegration", {
-    title: "exchangeintegration",
+    title: "Exchange Integration",
     routename: "exchangeintegration",
     csrfToken: req.csrfToken()
   });
 });
 router.get("/docs/libraries", function (req, res, next) {
   res.render("docs/libraries", {
-    title: "libraries",
+    title: "Libraries",
     routename: "libraries",
     csrfToken: req.csrfToken()
   });
 });
 router.get("/docs/nodemanagement", function (req, res, next) {
   res.render("docs/nodemanagement", {
-    title: "nodemanagement",
+    title: "Node Management",
     routename: "nodemanagement",
     csrfToken: req.csrfToken()
   });
 });
 router.get("/docs/parameters", function (req, res, next) {
   res.render("docs/parameters", {
-    title: "parameters",
+    title: "Blockchain Parameters",
     routename: "parameters",
     csrfToken: req.csrfToken()
   });
 });
 router.get("/docs/qaeintegration", function (req, res, next) {
   res.render("docs/qaeintegration", {
-    title: "qaeintegration",
+    title: "QAE Integration",
     routename: "qaeintegration",
     csrfToken: req.csrfToken()
   });
@@ -196,7 +196,7 @@ router.get("/docs/qaeintegration", function (req, res, next) {
 /* GET exchanges page. */
 router.get("/exchanges", function (req, res, next) {
   res.render("exchanges", {
-    title: "XQR Exchanges",
+    title: "Exchanges",
     routename: "exchanges",
     csrfToken: req.csrfToken()
   });
