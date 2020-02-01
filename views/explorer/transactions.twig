@@ -117,7 +117,7 @@ data.forEach(function (row) {
 tr = document.createElement("tr");
 
 td = document.createElement("td");
-td.innerHTML = '<a href="http://localhost:8080/explorer/transaction/?id=' + row.id + '">' + row.id.substr(0, 5) + '...' + row.id.substr(-5) + '</a>';
+td.innerHTML = '<a href="/explorer/transaction/' + row.id + '">' + row.id.substr(0, 5) + '...' + row.id.substr(-5) + '</a>';
 tr.appendChild(td);
 
 td = document.createElement("td");

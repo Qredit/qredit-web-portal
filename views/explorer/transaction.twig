@@ -20,9 +20,15 @@
 							<th scope="col">Confirmations</th>
 						</tr>
 					</thead>
-					<tbody id='transactiondetails'></tbody>
+					<tbody id='transactiondetails'>
+					
+					
+					
+					
+					</tbody>
 
 				</table>
+				
 			</div>
 		</div>
 	</div>
@@ -40,26 +46,33 @@ $(document).ready(function () {
 
 	var socket = io();
 
-	socket.emit('gettransactiondetails', {transactionId: {{ transactionId }}} );
+	socket.emit('gettransactiondetails', {transactionId: '{{ transactionId }}'} );
 
 	socket.on('showtransactiondetails', function (data) {
 
 		var mainTable = document.getElementById("transactiondetails");
-		var tr,
-	td;
+		var tr, td;
 
-	data.forEach(function (row) {
+		for(var k in data)
+		{
 
-		tr = document.createElement("tr");
-
+			tr = document.createElement("tr");
+			
 			td = document.createElement("td");
-			td.innerHTML = row.id;
+			td.innerHTML = k;
+			tr.appendChild(td);
+			
+			td = document.createElement("td");
+			td.innerHTML = data[k];
 			tr.appendChild(td);
 
-		transactiondetails.appendChild(tr);
+			transactiondetails.appendChild(tr);
 
-				});
-			});
+		};
+
+
+	});
+
 });
 
 </script>

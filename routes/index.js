@@ -86,9 +86,16 @@ router.get("/explorer/delegatesmonitor", function (req, res, next) {
 });
 /* URL Parameter routes*/
 
-router.get('/explorer/transaction/:transactionId', function (req, res) {
-  console.log(req.transactionId)
-})
+router.get("/explorer/transaction/:transactionId", function (req, res, next) {
+  res.render("explorer/transaction", {
+    title: "transaction",
+    routename: "transaction",
+    transactionId: req.params.transactionId,
+    csrfToken: req.csrfToken()
+  });
+});
+
+
 
  /* router.get('/explorer/transaction/:transactionId', function (req, res) {
   console.log(req.params)

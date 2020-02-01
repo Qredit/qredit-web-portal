@@ -239,8 +239,18 @@ io.on('connection', function (socket) {
 
 			(async () => {
 
-				if (input.transactionId) response = await qapi.getTransactionByID(input.transactionId)
-				else response = await qapi.listTransactions()
+				response = await qapi.getTransactionByID(input.transactionId);
+				
+				var qaedata = await qaeapi.getTransaction(input.transactionId);
+				
+				if (qaedata.length > 0)
+				{
+					response.data.qae = qaedata[0];
+				}
+				
+				var flatJson = flatten(response.data);
+
+/*
 				var data = response.data;
 				var flatJson = [];
 				for (let i = 0; i < data.length; i++) {
@@ -249,7 +259,7 @@ io.on('connection', function (socket) {
 					};
 					flatJson.push(tempJson);
 				}
-	
+*/
 				socket.emit('showtransactiondetails', flatJson);
 	
 			})();
