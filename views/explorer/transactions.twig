@@ -117,8 +117,7 @@ data.forEach(function (row) {
 tr = document.createElement("tr");
 
 td = document.createElement("td");
-td.innerHTML = row.id.substr(0, 5) + '...' + row.id.substr(-5);
-// td.innerHTML = row.id;
+td.innerHTML = '<a href="http://localhost:8080/explorer/transaction/?id=' + row.id + '">' + row.id.substr(0, 5) + '...' + row.id.substr(-5) + '</a>';
 tr.appendChild(td);
 
 td = document.createElement("td");
@@ -138,9 +137,7 @@ td.innerHTML = row.recipient;
 tr.appendChild(td);
 
 td = document.createElement("td");
-td.innerHTML = row.smartbridge.substr(0, 10) + '...';
-// td.innerHTML = row.smartbridge.substr(0, 5) + '...' + row.smartbridge.substr(-5);
-// td.innerHTML = row.smartbridge;
+td.innerHTML = row.smartbridge;
 tr.appendChild(td);
 
 td = document.createElement("td");

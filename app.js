@@ -40,7 +40,6 @@ var io = require('socket.io').listen(server);
 server.listen(serverPort);
 
 
-
 ////
 // Web Stuff
 
@@ -234,7 +233,53 @@ io.on('connection', function (socket) {
 
 	});
 
-	// Socket IO getopwallets
+		// Socket IO gettransactiondetails
+
+		socket.on('gettransactiondetails', function (input) {
+
+			(async () => {
+	
+				var response = await qapi.listTransactions();
+				var data = response.data;
+
+				var flatJson = [];
+				for (let i = 0; i < data.length; i++) {
+					let tempJson = {
+						id: data[i].id,
+					};
+					flatJson.push(tempJson);
+				}
+	
+				socket.emit('showtransactiondetails', flatJson);
+	
+			})();
+	
+		});
+
+// Socket IO gettokeninfo
+
+		socket.on('gettokeninfo', function (input) {
+
+			(async () => {
+			
+				var response = await qaeapi.getToken();
+				var data = response.data;
+		
+				var flatJson = [];
+				for (let i = 0; i < data.length; i++) {
+					let tempJson = {
+						id: data[i].id,
+					};
+					flatJson.push(tempJson);
+				}
+			
+				socket.emit('showtokeninfo', flatJson);
+			
+			})();
+			
+		});
+
+	// Socket IO gettopwallets
 
 	socket.on('gettopwallets', function (input) {
 
@@ -635,3 +680,4 @@ async function whilstScanTransactions(data, db, revjsonmap, fields) {
 	});
 
 }
+

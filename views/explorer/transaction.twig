@@ -1,0 +1,54 @@
+{% extends 'layout_main.twig' %}
+
+{% block body %}
+
+	<div class="breadcrumb">
+		<h1>Transaction</h1>
+	</div>
+	<p class="text-small text-muted text-left">Text</p>
+	<div class="separator-breadcrumb border-top"></div>
+
+<div id="transactionsdetailsid"></div>
+
+{{ data }}
+{% endblock %}
+
+
+{% block javascripts %}
+
+
+	<script>
+var getJSON = function(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.responseType = 'json';
+    xhr.onload = function() {
+      var status = xhr.status;
+      if (status === 200) {
+        callback(null, xhr.response);
+      } else {
+        callback(status, xhr.response);
+      }
+    };
+    xhr.send();
+};
+
+var url = "http://api.qredit.cloud:4103/api/transactions/"
+
+const params = new URLSearchParams(document.location.search);
+const id = params.get("id");
+
+
+
+getJSON(url + id,      function(err, data) {
+
+		if (err, data)
+		{
+			$('#transactionsdetailsid').html(id);
+		}
+	
+	});
+
+
+	</script>
+{% endblock %}

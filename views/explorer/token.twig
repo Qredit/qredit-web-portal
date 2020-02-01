@@ -1,0 +1,82 @@
+{% extends 'layout_main.twig' %}
+
+{% block body %}
+
+	<div class="breadcrumb">
+		<h1>Token Info</h1>
+	</div>
+	<p class="text-small text-muted text-left">Text</p>
+	<div class="separator-breadcrumb border-top"></div>
+
+
+
+	<div class="card">
+		<div class="card-body">
+			<div class="table-responsive">
+				<table class="table table-sm table-striped">
+					<thead>
+						<tr>
+							<th scope="col">Transaction ID</th>
+							<th scope="col">Confirmations</th>
+						</tr>
+					</thead>
+					<tbody id='transaction'></tbody>
+
+				</table>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+
+
+	<script>
+var getJSON = function(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.responseType = 'json';
+    xhr.onload = function() {
+      var status = xhr.status;
+      if (status === 200) {
+        callback(null, xhr.response);
+      } else {
+        callback(status, xhr.response);
+      }
+    };
+    xhr.send();
+};
+
+var url = "https://qae.qredit.cloud/api/token/"
+
+const params = new URLSearchParams(document.location.search);
+const tokenid = params.get("tokenid");
+
+getJSON(url + tokenid, function(err, data) {
+
+
+var mainTable = document.getElementById("transaction");
+
+
+var tr,
+td;
+
+data.forEach(function (row) {
+
+tr = document.createElement("tr");
+
+td = document.createElement("td");
+td.innerHTML = row.paused;
+tr.appendChild(td);
+
+transaction.appendChild(tr);
+
+});
+
+});
+
+
+	</script>
+{% endblock %}
