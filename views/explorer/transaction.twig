@@ -8,47 +8,57 @@
 	<p class="text-small text-muted text-left">Text</p>
 	<div class="separator-breadcrumb border-top"></div>
 
-<div id="transactionsdetailsid"></div>
 
-{{ data }}
+
+	<div class="card">
+		<div class="card-body">
+			<div class="table-responsive">
+				<table class="table table-sm table-striped">
+					<thead>
+						<tr>
+							<th scope="col">Transaction ID</th>
+							<th scope="col">Confirmations</th>
+						</tr>
+					</thead>
+					<tbody id='transaction'></tbody>
+
+				</table>
+			</div>
+		</div>
+	</div>
+
 {% endblock %}
 
 
 {% block javascripts %}
 
+<script>
 
-	<script>
-var getJSON = function(url, callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.responseType = 'json';
-    xhr.onload = function() {
-      var status = xhr.status;
-      if (status === 200) {
-        callback(null, xhr.response);
-      } else {
-        callback(status, xhr.response);
-      }
-    };
-    xhr.send();
-};
+$(document).ready(function () {
 
-var url = "http://api.qredit.cloud:4103/api/transactions/"
+	var socket = io();
 
-const params = new URLSearchParams(document.location.search);
-const id = params.get("id");
+	socket.emit('gettransactiondetails', {});
 
+	socket.on('showtransactiondetails', function (err, data) {
 
+		var mainTable = document.getElementById("transactiondetails");
+		var tr,
+	td;
 
-getJSON(url + id,      function(err, data) {
+	data.forEach(function (row) {
 
-		if (err, data)
-		{
-			$('#transactionsdetailsid').html(id);
-		}
-	
-	});
+		tr = document.createElement("tr");
 
+			td = document.createElement("td");
+			td.innerHTML = row.id;
+			tr.appendChild(td);
 
-	</script>
+		transaction.appendChild(tr);
+
+				});
+			});
+});
+
+</script>
 {% endblock %}
