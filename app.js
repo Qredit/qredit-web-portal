@@ -238,10 +238,10 @@ io.on('connection', function (socket) {
 		socket.on('gettransactiondetails', function (input) {
 
 			(async () => {
-	
-				var response = await qapi.listTransactions();
-				var data = response.data;
 
+				if (input.transactionId) response = await qapi.getTransactionByID(input.transactionId)
+				else response = await qapi.listTransactions()
+				var data = response.data;
 				var flatJson = [];
 				for (let i = 0; i < data.length; i++) {
 					let tempJson = {

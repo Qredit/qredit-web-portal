@@ -20,12 +20,14 @@
 							<th scope="col">Confirmations</th>
 						</tr>
 					</thead>
-					<tbody id='transaction'></tbody>
+					<tbody id='transactiondetails'></tbody>
 
 				</table>
 			</div>
 		</div>
 	</div>
+
+	{{ transactionId }}
 
 {% endblock %}
 
@@ -38,9 +40,9 @@ $(document).ready(function () {
 
 	var socket = io();
 
-	socket.emit('gettransactiondetails', {});
+	socket.emit('gettransactiondetails', { transaction: {{ transactionId }} );
 
-	socket.on('showtransactiondetails', function (err, data) {
+	socket.on('showtransactiondetails', function (data) {
 
 		var mainTable = document.getElementById("transactiondetails");
 		var tr,
@@ -54,7 +56,7 @@ $(document).ready(function () {
 			td.innerHTML = row.id;
 			tr.appendChild(td);
 
-		transaction.appendChild(tr);
+		transactiondetails.appendChild(tr);
 
 				});
 			});

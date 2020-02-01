@@ -85,29 +85,19 @@ router.get("/explorer/delegatesmonitor", function (req, res, next) {
   });
 });
 /* URL Parameter routes*/
-router.get("/explorer/block/*", function (req, res, next) {
-  res.render("explorer/block", {
-    title: "block",
-    routename: "block",
-    csrfToken: req.csrfToken()
-  });
-});
 
-router.get("/explorer/transaction/*", function (req, res, next) {
+/*router.get('/explorer/transaction/:transactionId', function (req, res) {
+  console.log(req.transactionId)
+})*/
+
+ router.get('/explorer/transaction/:transactionId', function (req, res) {
+  console.log(req.params)
   res.render("explorer/transaction", {
-    title: "transactions",
-    routename: "transactions",
+    title: "Transaction Details",
+    routename: "transactionId",
     csrfToken: req.csrfToken()
   });
-});
-
-router.get("/explorer/token/*", function (req, res, next) {
-  res.render("explorer/token", {
-    title: "token",
-    routename: "token",
-    csrfToken: req.csrfToken()
-  });
-});
+}); 
 
 /* GET tools page. */
 router.get("/tools/batchsender", function (req, res, next) {
