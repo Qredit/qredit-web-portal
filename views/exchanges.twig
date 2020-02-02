@@ -39,7 +39,6 @@
                                             <th scope="col">Exchange Name</th>
                                             <th scope="col">Official URL</th>
                                             <th scope="col">24h Exchange Volume</th>
-                                            <th scope="col">24h XQR Trade Volume</th>
                                             <th scope="col">QAE Support</th>
                                             <th scope="col">Fiat Support</th>
                                             <th scope="col">CMC Listed</th>
@@ -51,8 +50,7 @@
                                             <th scope="row">1</th>
                                             <td><span data-toggle="tooltip" data-placement="top" data-original-title="Launched in 2018 and based in Sweden.">Altilly</span></td>
                                             <td><a href="https://altilly.com">altilly.com</a></td>
-                                            <td>. BTC</td>
-                                            <td>. BTC</td>
+                                            <td id='altilly'></td>
                                             <td> <i class="nav-icon i-Yes font-weight-bold"></i></td>
                                             <td><i class="nav-icon i-Close-Window font-weight-bold"></i></td>
                                             <td> <i class="nav-icon i-Yes font-weight-bold"></i></td>
@@ -62,8 +60,7 @@
                                             <th scope="row">2</th>
                                             <td>STEX</td>
                                             <td><a href="https://stex.com">stex.com</a></td>
-                                            <td>. BTC</td>
-                                            <td>. BTC</td>
+                                            <td id='stocks_exchange'></td>
                                             <td> <i class="nav-icon i-Yes font-weight-bold"></i></td>
                                             <td> <i class="nav-icon i-Yes font-weight-bold"></i></td>
                                             <td> <i class="nav-icon i-Yes font-weight-bold"></i></td>
@@ -73,8 +70,7 @@
                                             <th scope="row">3</th>
                                             <td>SatoExchange</td>
                                             <td><a href="https://satoexchange.com">satoexchange.com</a></td>
-                                            <td>. BTC</td>
-                                            <td>. BTC</td>
+                                            <td id='satoexchange'></td>
                                             <td><i class="nav-icon i-Close-Window font-weight-bold"></i></td>
                                             <td><i class="nav-icon i-Close-Window font-weight-bold"></i></td>
                                             <td><i class="nav-icon i-Close-Window font-weight-bold"></i></td>
@@ -83,9 +79,8 @@
                                         <tr>
                                             <th scope="row">4</th>
                                             <td><span data-toggle="tooltip" data-placement="top" data-original-title="Please avoid this exchange.">TradeSatoshi</span></td>
-                                            <td><a href="https://atomars.com">tradesatoshi.com</a></td>
-                                            <td>. BTC</td>
-                                            <td>. BTC</td>
+                                            <td><a href="https://tradesatoshi.com">tradesatoshi.com</a></td>
+                                            <td id='tradesatoshi'></td>
                                             <td><i class="nav-icon i-Close-Window font-weight-bold"></i></td>
                                             <td><i class="nav-icon i-Close-Window font-weight-bold"></i></td>
                                             <td> <i class="nav-icon i-Yes font-weight-bold"></i></td>
@@ -95,8 +90,7 @@
                                             <th scope="row">5</th>
                                             <td><span data-toggle="tooltip" data-placement="top" data-original-title="Fake Volume.">FinexBox</span></td>
                                             <td><a href="https://finexbox.com">finexbox.com</a></td>
-                                            <td>. BTC</td>
-                                            <td>. BTC</td>
+                                            <td id='finexbox'></td>
                                             <td><i class="nav-icon i-Close-Window font-weight-bold"></i></td>
                                             <td><i class="nav-icon i-Close-Window font-weight-bold"></i></td>
                                             <td> <i class="nav-icon i-Yes font-weight-bold"></i></td>
@@ -106,8 +100,7 @@
                                             <th scope="row">6</th>
                                             <td><span data-toggle="tooltip" data-placement="top" data-original-title="Long maintenance.">BitexLive</span></td>
                                             <td><a href="https://bitexlive.com">bitexlive.com</a></td>
-                                            <td>. BTC</td>
-                                            <td>. BTC</td>
+                                            <td id='bitexlive'></td>
                                             <td><i class="nav-icon i-Close-Window font-weight-bold"></i></td>
                                             <td><i class="nav-icon i-Close-Window font-weight-bold"></i></td>
                                             <td><i class="nav-icon i-Close-Window font-weight-bold"></i></td>
@@ -152,82 +145,74 @@ const ext = "/tickers?coin_ids=qredit"
 /* BITEXLIVE */
 
 getJSON(api + "bitexlive" ,      function(err, data) {
-	   console.log(data);
-     });
-
-getJSON(api + "bitexlive" + ext,      function(err, data) {
-	   console.log(data);
+		if (data.trade_volume_24h_btc)
+		{  
+			$('#bitexlive').html(parseFloat(data.trade_volume_24h_btc).toFixed(2) + '<strong> BTC</strong>' );
+        }
      });
 
 /* ALTILLY */
 
 getJSON(api + "altilly" ,      function(err, data) {
-	   console.log(data);
-     });
-
-getJSON(api + "altilly" + ext,      function(err, data) {
-	   console.log(data);
-     });
-
+		if (data.trade_volume_24h_btc)
+		{  
+			$('#altilly').html(parseFloat(data.trade_volume_24h_btc).toFixed(2) + '<strong> BTC</strong>' );
+        }
+        });
 /* STEX */
 
 getJSON(api + "stocks_exchange" ,      function(err, data) {
-	   console.log(data);
-     });
-
-getJSON(api + "stocks_exchange" + ext,      function(err, data) {
-	   console.log(data);
+		if (data.trade_volume_24h_btc)
+		{  
+			$('#stocks_exchange').html(parseFloat(data.trade_volume_24h_btc).toFixed(2) + '<strong> BTC</strong>' );
+        }
      });
 
 /* ATOMARS */
 
 getJSON(api + "atomars" ,      function(err, data) {
-	   console.log(data);
-     });
-
-getJSON(api + "atomars" + ext,      function(err, data) {
-	   console.log(data);
+		if (data.trade_volume_24h_btc)
+		{  
+			$('#atomars').html(parseFloat(data.trade_volume_24h_btc).toFixed(2) + '<strong> BTC</strong>' );
+        }
      });
 
 /* ALTERDICE */
 
 getJSON(api + "alterdice" ,      function(err, data) {
-	   console.log(data);
-     });
-
-getJSON(api + "alterdice" + ext,      function(err, data) {
-	   console.log(data);
+		if (data.trade_volume_24h_btc)
+		{  
+			$('#alterdice').html(parseFloat(data.trade_volume_24h_btc).toFixed(2) + '<strong> BTC</strong>' );
+        }
      });
 
 /* SATOEXCHANGE */
 
 getJSON(api + "satoexchange" ,      function(err, data) {
-	   console.log(data);
-     });
-
-getJSON(api + "satoexchange" + ext,      function(err, data) {
-	   console.log(data);
+		if (data.trade_volume_24h_btc)
+		{  
+			$('#satoexchange').html(parseFloat(data.trade_volume_24h_btc).toFixed(2) + '<strong> BTC</strong>' );
+        }
      });
 
 /* TRADESATOSHI */
 
 getJSON(api + "tradesatoshi" ,      function(err, data) {
-	   console.log(data);
-     });
-
-getJSON(api + "tradesatoshi" + ext,      function(err, data) {
-	   console.log(data);
+		if (data.trade_volume_24h_btc)
+		{  
+			$('#tradesatoshi').html(parseFloat(data.trade_volume_24h_btc).toFixed(2) + '<strong> BTC</strong>' );
+        }
      });
 
 /* FINEXBOX */
 
 getJSON(api + "finexbox" ,      function(err, data) {
-	   console.log(data);
+		if (data.trade_volume_24h_btc)
+		{  
+			$('#finexbox').html(parseFloat(data.trade_volume_24h_btc).toFixed(2) + '<strong> BTC</strong>' );
+        }
      });
 
-getJSON(api + "finexbox" + ext,      function(err, data) {
-	   console.log(data);
-     });
     </script>
     
 
