@@ -204,6 +204,56 @@ io.on('connection', function (socket) {
 
 	});
 
+	socket.on('search', function (input) {
+
+		(async () => {
+			var blockResults = await qapi.getBlockByID(input)
+			var walletResults = await qapi.getWalletByID(input)
+			var transactionsResult = await qapi.getTransactionByID(input)
+			var delegateResult = await qapi.getDelegate(input)
+			var tokensResult = await qaeapi.getToken(input);
+
+			var blockParsed = null
+			if (blockResults.data) {
+				blockParsed = blockResults.data;
+
+				if (blockResults.data.length > 1)
+					blockParsed = blockResults.data[0]
+			}
+
+			var walletParsed = null
+			if (walletResults.data)
+				walletParsed = walletResults.data;
+
+			var transactionParsed = null
+			var tokenTransactions = null
+			if (transactionsResult.data) {
+				if (transactionsResult.data.vendorField.toString().includes('qae1'))
+					tokenTransactions = transactionsResult.data
+				else
+					transactionParsed = transactionsResult.data;
+			}
+
+			var delegateParsed = null
+			if (delegateResult.data)
+				delegateParsed = delegateResult.data;
+
+			var tokensParsed = tokensResult.length > 0 ? tokensResult[0] : null
+
+			var returnValue = {
+				blocks: blockParsed,
+				wallets: walletParsed,
+				transactions: transactionParsed,
+				tokenTransactions: tokenTransactions,
+				delegates: delegateParsed,
+				tokens: tokensParsed
+			}
+
+			socket.emit('showsearch', returnValue);
+
+		})();
+	});
+
 	// Socket IO gettransactions
 
 	socket.on('gettransactions', function (input) {
@@ -233,80 +283,79 @@ io.on('connection', function (socket) {
 
 	});
 
-		// Socket IO gettransactiondetails
+	// Socket IO gettransactiondetails
 
-		socket.on('gettransactiondetails', function (input) {
+	socket.on('gettransactiondetails', function (input) {
 
-			(async () => {
+		(async () => {
 
-				response = await qapi.getTransactionByID(input.transactionId);
-				
-				var qaedata = await qaeapi.getTransaction(input.transactionId);
-				
-				if (qaedata)
-				{
-					response.data.qae = qaedata[0];
-				}
+			response = await qapi.getTransactionByID(input.transactionId);
+
+			var qaedata = await qaeapi.getTransaction(input.transactionId);
+
+			if (qaedata) {
+				response.data.qae = qaedata[0];
+			}
 
 
-				var data = flatten(response.data);
+			var data = flatten(response.data);
 
-				var tempJson = {
-					'Transaction ID': data['id'],
-					'Block ID': data['blockId'],
-					Amount: data['amount'],
-					Fee: data['fee'],
-					Sender: data['sender'],
-					'Public Key': data['senderPublicKey'],
-					Recipient: data['recipient'],
-					Smartbridge: data['vendorField'],
-					Confirmations: data['confirmations'],
-					Timestamp: data['timestamp.human'],
-					'Block Height': data['qae.blockHeight'],
-					'QAE Valid Transaction': data['qae.valid'] == true ? '<i class="nav-icon i-Yes font-weight-bold"style="color:green;"></i>' : '<i class="nav-icon i-Close-Window font-weight-bold" style="color:red;"></i>',
-					'QAE Invalid Reason': data['qae.invalidReason'],
-					'QAE Transaction Type': data['qae.transactionDetails.transactionType'],
-					'QAE Token ID': data['qae.transactionDetails.tokenIdHex'],
-					'QAE Token Symbol': data['qae.transactionDetails.symbol'],
-					'QAE Token Name': data['qae.transactionDetails.name'],
-					'QAE Document URL': data['qae.transactionDetails.documentUri'],
-					'QAE Decimals': data['qae.transactionDetails.decimals'],
-					'QAE Amount': Big(data['qae.transactionDetails.sendOutput.amount']).div(Big(10).pow(data['qae.transactionDetails.decimals'])).toFixed(data['qae.transactionDetails.decimals'])
+			var tempJson = {
+				'Transaction ID': data['id'],
+				'Block ID': data['blockId'],
+				Amount: data['amount'],
+				Fee: data['fee'],
+				Sender: data['sender'],
+				'Public Key': data['senderPublicKey'],
+				Recipient: data['recipient'],
+				Smartbridge: data['vendorField'],
+				Confirmations: data['confirmations'],
+				Timestamp: data['timestamp.human'],
+				'Block Height': data['qae.blockHeight'],
+				'QAE Valid Transaction': data['qae.valid'] == true ? '<i class="nav-icon i-Yes font-weight-bold"style="color:green;"></i>' : '<i class="nav-icon i-Close-Window font-weight-bold" style="color:red;"></i>',
+				'QAE Invalid Reason': data['qae.invalidReason'],
+				'QAE Transaction Type': data['qae.transactionDetails.transactionType'],
+				'QAE Token ID': data['qae.transactionDetails.tokenIdHex'],
+				'QAE Token Symbol': data['qae.transactionDetails.symbol'],
+				'QAE Token Name': data['qae.transactionDetails.name'],
+				'QAE Document URL': data['qae.transactionDetails.documentUri'],
+				'QAE Decimals': data['qae.transactionDetails.decimals'],
+				'QAE Amount': Big(data['qae.transactionDetails.sendOutput.amount']).div(Big(10).pow(data['qae.transactionDetails.decimals'])).toFixed(data['qae.transactionDetails.decimals'])
+			};
+
+
+			socket.emit('showtransactiondetails', tempJson);
+
+		})();
+
+	});
+
+	// Socket IO gettokeninfo
+
+	socket.on('gettokeninfo', function (input) {
+
+		var page = input.page;
+		var limit = input.limit;
+
+		(async () => {
+
+			var data = await qaeapi.getTransaction(input.tokenid);
+
+			var flatJson = [];
+
+			for (let i = 0; i < data.length; i++) {
+				let tempJson = {
+					symbol: data[i].symbol,
+					paused: data[i].paused,
 				};
+				flatJson.push(tempJson);
+			}
 
+			socket.emit('showtokeninfo', flatJson);
 
-				socket.emit('showtransactiondetails', tempJson);
-	
-			})();
-	
-		});
+		})();
 
-// Socket IO gettokeninfo
-
-			socket.on('gettokeninfo', function (input) {
-
-				var page = input.page;
-				var limit = input.limit;
-		
-				(async () => {
-		
-					var data = await qaeapi.getTransaction(input.tokenid);
-		
-					var flatJson = [];
-		
-					for (let i = 0; i < data.length; i++) {
-						let tempJson = {
-							symbol: data[i].symbol,
-							paused: data[i].paused,
-						};
-						flatJson.push(tempJson);
-					}
-		
-					socket.emit('showtokeninfo', flatJson);
-		
-				})();
-		
-			});
+	});
 	// Socket IO gettopwallets
 
 	socket.on('gettopwallets', function (input) {
