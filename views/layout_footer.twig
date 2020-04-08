@@ -6,17 +6,27 @@
             <p><strong>About Qredit</strong></p>
             <p>Qredit Enhanced Blockchain Suite.
             </p>
+                    <div>
+
+                             
+        <td id='altilly'></td>
+        <td id='stocks_exchange'></td><td id='satoexchange'></td>
+
+
+        </div>
         </div>
     </div>
     <div class="footer-bottom border-top pt-3 d-flex flex-column flex-sm-row align-items-center">
         <a class="btn btn-primary text-white btn-rounded"
             href="https://qredit.io"
             target="_blank">Visit Qredit Official Website</a>
+            
          <a class="btn btn-danger text-white btn-rounded"
             href="https://altilly.com"
             target="_blank">Visit Altilly</a>
         <span class="flex-grow-1"></span>
         <div class="d-flex align-items-center">
+
             <img class="logo" src="/images/qredit-cp-1.png" alt="">
             <div>
                 <p class="m-0">&copy; 2020 Qredit Web Portal | Some Rights Reserved</p>
@@ -35,4 +45,64 @@
     border:1px solid #d22d3d1f;
 }
 </style>
+
+	<script>
+var getJSON = function(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.responseType = 'json';
+    xhr.onload = function() {
+      var status = xhr.status;
+      if (status === 200) {
+        callback(null, xhr.response);
+      } else {
+        callback(status, xhr.response);
+      }
+    };
+    xhr.send();
+};
+
+const api = "https://api.coingecko.com/api/v3/exchanges/"
+const ext = "/tickers?coin_ids=qredit"
+
+
+/* ALTILLY */
+
+getJSON(api + "altilly" ,      function(err, data) {
+		if (data.trade_volume_24h_btc)
+		{  
+			$('#altilly').html(parseFloat(data.trade_volume_24h_btc).toFixed(2) + '<strong> BTC</strong>' );
+        }
+        });
+/* STEX */
+
+getJSON(api + "stocks_exchange" ,      function(err, data) {
+		if (data.trade_volume_24h_btc)
+		{  
+			$('#stocks_exchange').html(parseFloat(data.trade_volume_24h_btc).toFixed(2) + '<strong> BTC</strong>' );
+        }
+     });
+
+/* ATOMARS */
+
+getJSON(api + "atomars" ,      function(err, data) {
+		if (data.trade_volume_24h_btc)
+		{  
+			$('#atomars').html(parseFloat(data.trade_volume_24h_btc).toFixed(2) + '<strong> BTC</strong>' );
+        }
+     });
+
+
+/* SATOEXCHANGE */
+
+getJSON(api + "satoexchange" ,      function(err, data) {
+		if (data.trade_volume_24h_btc)
+		{  
+			$('#satoexchange').html(parseFloat(data.trade_volume_24h_btc).toFixed(2) + '<strong> BTC</strong>' );
+        }
+     });
+
+    </script>
+ 
+
 <!-- fotter end -->
